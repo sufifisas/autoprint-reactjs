@@ -1,0 +1,368 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+}
+h1,h2,h3 {
+    font-weight: 400;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+a:-webkit-any-link {
+    color: inherit;
+}
+:focus {
+    outline: none;
+}
+
+html, body, #root, .app {
+    height: 100vh;
+    position: relative;
+}
+.index {
+    min-height: calc(100% - 40px);
+}
+.container {
+    max-width: 80vw;
+    margin: auto;
+}
+.header {
+    background-color: #5680E9;
+    width: 100%;
+}
+/* .header .container {
+    max-width: 90vw;
+    position: relative;
+} */
+.header .logo {
+    position: absolute;
+    top: 10px;
+}
+.header .logo img {
+    width: 20%;
+}
+.header nav {
+    display: flex;
+    padding: 10px;
+}
+.header nav span {
+    margin-right: auto;
+}
+.header nav span img {
+    width: 20%;
+}
+.header nav ul {
+    display: flex;
+    color: #fff;
+    margin-left: auto;
+    align-items: center;
+}
+.header nav ul li {
+    padding: 0px 20px;
+}
+.header nav button {
+    background-color: transparent;
+    border-radius: 25px;
+    font-family: inherit;
+    padding: 4px 30px;
+    border: 2px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+}
+.side {
+    display: flex;
+    min-height: 90vh;
+}
+.sidenav {
+    flex: 0 0 20%;
+    border: #e9e9e9 2px solid;
+}
+.sidenav li {
+    padding: 10px 40px;
+    font-size: 24px;
+}
+.sidenav li:hover {
+    background-color: #e9e9e9;
+    color: #8860D0
+}
+.sidenav li:active {
+    background-color: #e9e9e9;
+    color: #8860D0
+}
+.vendorcont {
+    padding: 0px 40px;
+    width: 100%;
+}
+.landing {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30px -170px;
+}
+.landing .row {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+.landing .row .col {
+    flex: 50%;
+    
+}
+.landing img {
+    width: 100%;
+}
+.landing .title  {
+    padding-right: 20%;
+    line-height: 1.1;
+}
+.landing .title h1 {
+    font-size: 60px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.landing .title p {
+    font-size: 24px;
+    font-weight: 300;
+    margin-top: 30px;
+}
+.home-button button {
+    font-family: inherit;
+    font-size: 28px;
+    font-weight: 300;
+    background-color: #8860D0;
+    border: 2px solid #8860D0;
+    border-radius: 25px;
+    padding: 5px 30px;
+    color: #fff;
+    margin: 20px 20px 0px 0px;
+    cursor: pointer;
+}
+.home-button button:nth-child(even) {
+    background-color: transparent;
+    color: #8860D0;
+} 
+
+.modal {
+    font-size: 12px;
+  }
+  .modal > .header {
+    width: 100%;
+    border-bottom: 1px solid gray;
+    font-size: 18px;
+    text-align: center;
+    padding: 5px;
+  }
+  .modal > .content {
+    width: 100%;
+    padding: 10px 5px;
+  }
+  .modal > .actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+  }
+  .modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+  }
+
+.modal-login {
+    text-align: center;
+}
+.modal-login h2{
+    font-size: 36px;
+    color: #5680E9;
+    margin-bottom: 20px;
+}
+.modal-login input {
+    display: block;
+    width: 100%;
+    padding: 20px 0px;
+    border: none;
+    border-bottom: solid 1px #000;
+    margin-bottom: 15px;
+}
+.modal-login input::placeholder {
+    font-size: 18px;
+    color: #000;
+}
+.modal-login span {
+    display: block;
+    text-align: left;
+    margin-bottom: 15px;
+}
+.modal-login .check {
+    width: unset;
+    display: inline-block;
+    margin-right: 5px;
+}
+.modal-login button.send {
+    width: 100%;
+    background-color: #8860D0;
+    border-radius: 50px;
+    border: none;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    margin: 0 0 15px 0;
+    cursor: pointer;
+}
+/* Contact us */
+.contact-body {
+    display: flex;
+    height: 80vh;
+    width: 100%;
+    align-items: center;
+}
+.contact-body .body1 {
+    flex: 0 0 40%;
+}
+.contact-body .body1 .contact-text{
+    position: relative;
+    padding: 20px 0px;
+}
+.contact-body .body1 .contact-text .line {
+    position: absolute;
+    background-color: #000;
+    height: 5px;
+    width: 100px;
+    bottom: 0;
+    left: 0;
+}
+.contact-body .body1 form {
+    padding: 20px 0px;
+}
+.contact-body .body1 form input, .contact-body .body1 form textarea{
+    width: 100%;
+    font-family:"Oswald" ;
+    font-size: 18px;
+    display: block;
+    background-color: #e9e9e9;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    margin: 5px 0px 10px 0px;
+}
+.contact-body .body1 form input::placeholder, .contact-body .body1 form input::placeholder {
+    font-size: 14px;
+    color: #797979;
+}
+.contact-body .body1 form .contact-button {
+    text-align: right;
+}
+.contact-body .body1 form .contact-button button {
+    width: 30%;
+    background-color: #5680E9;
+    border-radius: 50px;
+    border: none;
+    padding: 15px;
+    text-align: center;
+    color: #fff;
+    margin: 0 0 15px 0;
+    cursor: pointer;
+    margin-top: 20px
+}
+.contact-body .body2 {
+    flex: 0 0 60%;
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contact-body .body2 img {
+    width: 80%;
+}
+
+
+/* Profile */
+.react-tabs{
+    display: flex;
+    flex-wrap: wrap;
+}
+.react-tabs__tab-list {
+    flex: 0 0 20%;
+}
+.react-tabs__tab {
+    padding: 10px 10px 10px 0px;
+    color: #797979;
+    cursor: pointer;
+}
+.react-tabs__tab:hover {
+    color: #000;
+}
+.react-tabs__tab.react-tabs__tab--selected {
+    color: #000;
+    font-weight: 500;
+}
+.react-tabs__tab-panel {
+    
+}
+.react-tabs__tab-panel.react-tabs__tab-panel--selected {
+    flex: 0 0 80%;
+    align-items: stretch;
+}
+.profile {
+    padding: 40px 0px;
+    width: 100%;
+}
+.profile img {
+    width: 70%;
+}
+.profile .name {
+    margin: 10px 0px 20px 0px;
+}
+.profile .name h3 {
+    color: #797979;
+}
+.profile .myprofile {
+    margin-top: 10px
+}
+.profile .content {
+    border-radius: 25px;
+    border: none;
+    box-shadow: #797979 1px 5px 25px;
+    padding: 20px;
+    width: 100%;
+}
+.profile .subcontent {
+    margin-bottom: 10px;
+}
+.profile .subcontent h3:nth-child(even) {
+    color: #797979
+}
+.activity-list {
+    border-radius: 25px;
+    border: none;
+    box-shadow: #797979 1px 5px 25px;
+    padding: 20px;
+    width: 100%;
+}
+
+/*footer*/
+.footer {
+    background-color: #5680E9;
+    width: 100%;
+    height: 40px;
+    text-align: center;
+    padding: 10px;
+}
