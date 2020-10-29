@@ -19,7 +19,7 @@ class Header extends Component {
             <ul>
               <NavLink exact={true} activeStyle={{ color: '#000' }} to='/user'><li>Home</li></NavLink>
               <NavLink activeStyle={{ color: '#000' }} to="/user/activity"><li>Activity</li></NavLink>
-              <NavLink activeStyle={{ color: '#000' }} to="/user/contact"><li>Contact</li></NavLink>
+              <NavLink activeStyle={{ color: '#000' }} to="/user/contact"><li>Customer Support</li></NavLink>
               <NavLink activeStyle={{ color: '#000' }} to="/user/profile" ><li>Account</li></NavLink>
               <Logout />
             </ul>

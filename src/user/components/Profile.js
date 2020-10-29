@@ -17,8 +17,9 @@ class Profile extends Component {
                 'Authorization': 'superadmin_576a0a1284a853b56f50e876273cdadbfd8ec13408223f1492617a75399921c4'
               }
             const id = localStorage.getItem("id");
-          axios.get('https://backend-dot-autoprint-backend.et.r.appspot.com/user/'+ id ,{headers})
+          axios.get('http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080/user/'+ id ,{headers})
             .then(res => {
+                console.log(res)
               const users = res.data;
               this.setState({ users });
             })
@@ -36,6 +37,7 @@ class Profile extends Component {
                         </div>
                         <Tab>Profile</Tab>
                         <Tab>Update Profile</Tab>
+                        <Tab>Wallet</Tab>
                         <Tab>History</Tab>
                     </TabList>
 
@@ -57,11 +59,10 @@ class Profile extends Component {
                                 </div>
                                 <div className="subcontent">
                                     <h3>Mobile Number</h3>
-                                    <h3>n/a</h3>
                                 </div>
                                 <div className="subcontent">
                                     <h3>Card Number</h3>
-                                    <h3>n/a</h3>
+                                 
                                 </div>
                                 <div className="subcontent">
                                     <h3>Address</h3>
@@ -76,6 +77,9 @@ class Profile extends Component {
                     <TabPanel>
                         <h2>Update Profile</h2>
                         <Editprofile />
+                    </TabPanel>
+                    <TabPanel>
+                        <h2>Wallet</h2>
                     </TabPanel>
                     <TabPanel>
                         <h2>History</h2>
