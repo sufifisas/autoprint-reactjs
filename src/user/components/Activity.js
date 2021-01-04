@@ -1,39 +1,37 @@
-import React,{Component} from 'react'
+import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 
-class Activity extends Component {
-    constructor(props) {
-        super(props)
-               this.state = {
-                users: {}
-              }
-            }
-        componentDidMount() {
-            const token = localStorage.getItem("token");
-            const headers = {
-                'Content-Type': 'application/json',
-                'Authorization': token
-              }
-            const id = localStorage.getItem("id");
-          axios.get('https://backend-dot-autoprint-backend.et.r.appspot.com/activity/user/'+ id ,{headers})
-            
-            .then(res => {
-                console.log(res.data.content[0]);
-                const users = res.data.content[0];
-                this.setState({ users });
-            })  
-        } 
-    render(){
-        const {title,content} = this.state.users;
-        return(
-            <div className = "profile container">
-                <div className="activity-list">
-                    <h1>{title}</h1>
-                    <h2>{content}</h2>
-                </div>
-            </div>
-        );
-    }
+function Activity() {
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem("token")
+      }
+    const [list, setList] = useState([])
+    useEffect(() => {
+        axios
+			.get(`/activity/user/${localStorage.getItem("id")}`,{headers})
+			.then(response => {
+                setList(response.data.content)
+                })
+			.catch(error => {
+				console.log(error)
+            })
+    },[]);
+    
+    return (
+        <div>
+            <h1 style={{marginBottom: '20px'}}>Notification</h1>
+           {list.map((item, i) => {
+          return (
+          <ul key= {i} className="orderlist">
+            <li>{item.id}</li>
+            <li style={{width: '25% '}}>{item.title}</li>
+            <li style={{width: '45% '}}>{item.content}</li>
+            </ul>
+          )
+        })}
+        </div>
+    )
 }
 
 export default Activity;

@@ -10,14 +10,15 @@ class Vendorheader extends Component {
   
   return (
     <div className="header" id="header" style={{backgroundColor:"#fff",borderBottom:"#e9e9e9 2px solid"}}>
-      <div className="head" style={{padding:"0px 40px"}}>
-        <span className="logo">
-        <Link to='/user'>
-          <img src={Purple} alt=""/></Link>
-        </span>
+      <div className="head" style={{padding:"10px 40px"}}>
+        
         <nav>
-            <ul>
-              
+        
+            <ul style={{marginLeft:'none', width:'100%'}}>
+            <span className="logo" style={{position:"inherit"}}>
+            <Link to='/user'>
+              <img src={Purple} alt=""/></Link>
+            </span>
               <Logout />
             </ul>
             

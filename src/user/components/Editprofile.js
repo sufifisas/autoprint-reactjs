@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+
 class Editprofile extends Component {
 	constructor(props) {
         super(props)
@@ -8,14 +9,48 @@ class Editprofile extends Component {
 		this.state = {
 			username: '', 
             email: '',
-            fullnamename: ''   
+            fullname: '',
+            imageBase64: '' ,
+            phoneNumber: '',
+            img: false 
         }
         
     }
+    show = () => {
+        if(this.state.img === true)
+        return (
+            <div>
+                <img src={this.state.imageBase64} alt=""/>
+            </div>
+        )
+    }
 
 	changeHandler = e => {
-		this.setState({ [e.target.name]: e.target.value })
-	}
+        this.setState({ [e.target.name]: e.target.value })
+    }
+    uploadImage = async (e) => {
+        const file = e.target.files[0];
+        const base64 = await this.convertBase64(file);
+        this.setState({ imageBase64: base64 })
+        this.setState({ img: true })
+        this.show()
+      };
+    
+    convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+    
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+    
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
+    
 
 	submitHandler = e => {
         const token = localStorage.getItem("token")
@@ -26,13 +61,13 @@ class Editprofile extends Component {
         const id = localStorage.getItem("id");
 		e.preventDefault()
 		axios
-			.put('https://backend-dot-autoprint-backend.et.r.appspot.com/user/'+ id , this.state , {headers})
+			.put('/user/'+ id , this.state , {headers})
 			.then(response => {
                 console.log(response);
                 if(response.status === 200){
                     alert("Profile has been updated")
-                    
-                }        
+                    window.location.reload(false);   
+                }          
 			})
 			.catch(error => {
 				console.log(error)
@@ -41,7 +76,7 @@ class Editprofile extends Component {
 
 	render() {
         
-        const { username, email, fullname  } = this.state;
+        const { username, email, fullname , phoneNumber} = this.state;
         
 		return (
             <div className="content" style={{marginTop: "10px"}}>
@@ -75,8 +110,28 @@ class Editprofile extends Component {
                                         onChange={this.changeHandler}
                                     />
                                 </div>
+                                <div>
+                                    <input
+                                        type="text"
+                                        name="phoneNumber"
+                                        placeholder="Phone Number"
+                                        value={phoneNumber}
+                                        onChange={this.changeHandler}
+                                    />
+                                </div>
+                                <div style= {{marginBottom: "20px"}}>
+                                    <p style= {{textAlign: "left"}}>Upload Image</p>
+                                    <input
+                                        type="file"
+                                        onChange={(e) => {
+                                        this.uploadImage(e);
+                                        }}
+                                        style = {{borderBottom: 'none', padding: "0"}}
+                                    />
+                                    {this.show()}
+                                </div>
                             
-                                <button type="submit" className="send" style={{backgroundColor:"#5680E9"}}>Update</button>
+                                <button type="submit" className="send" style={{backgroundColor:"#5680E9", borderRadius:"0"}}>Update</button>
                             </form>
                         </div>
                         </div>

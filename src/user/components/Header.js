@@ -1,27 +1,27 @@
-import React, {Component} from 'react';
-import {Link,NavLink} from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {Link,NavLink, withRouter} from 'react-router-dom';
 import White from '../../img/logo-wht.png'
-import Logout from '../../components/Logout'
 
 
-class Header extends Component {
- 
-  render(){
+function Header(props) {
   
+
   return (
     <div className="header" id="header">
-      <div className="container">
-        <span className="logo">
-        <Link to='/user'>
-          <img src={White} alt=""/></Link>
-        </span>
+      <div className="container-lg content">
+        
         <nav>
+          <span className="logo" style={{position:"inherit", width:'15%'}}>
+          <Link to='/user'>
+            <img src={White} alt=""/></Link>
+          </span>
             <ul>
-              <NavLink exact={true} activeStyle={{ color: '#000' }} to='/user'><li>Home</li></NavLink>
-              <NavLink activeStyle={{ color: '#000' }} to="/user/activity"><li>Activity</li></NavLink>
+              {/* <NavLink exact={true} activeStyle={{ color: '#000' }} to='/user'><li>Home</li></NavLink> */}
+              <NavLink activeStyle={{ color: '#000' }} to="/user/order"><li>Order</li></NavLink>
+              <NavLink activeStyle={{ color: '#000' }} to="/user/activity"><li>Notification</li></NavLink>
               <NavLink activeStyle={{ color: '#000' }} to="/user/contact"><li>Customer Support</li></NavLink>
               <NavLink activeStyle={{ color: '#000' }} to="/user/profile" ><li>Account</li></NavLink>
-              <Logout />
+              <p style={{marginBottom: '0px'}}>MYR {localStorage.getItem("wallet")}</p>
             </ul>
             
         </nav>
@@ -29,6 +29,6 @@ class Header extends Component {
     </div>
   );
 }
-}
 
-export default Header;
+
+export default withRouter(Header);

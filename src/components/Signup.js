@@ -31,7 +31,7 @@ class Signup extends Component {
                 console.log(response);
                 if(response.status === 200){
                     alert("registration success")
-                    
+                    window.location.reload()
                 }        
 			})
 			.catch(error => {
@@ -58,7 +58,7 @@ class Signup extends Component {
 			
                 <Popup overlayStyle={overlay} contentStyle={content} trigger={<button className="button"> Get Started </button>} modal>
                     {close => (
-                    <div className="modal">
+                    <div className="modal1">
                         <span className="close" onClick={close}>
                         &times;
                         </span>

@@ -1,8 +1,10 @@
 import React,{Component} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import UserIcon from '../../img/user.png'
 import Editprofile from '../../user/components/Editprofile'
+import UpdatePassword from '../../user/components/UpdatePassword'
+import Topup from '../../user/components/Topup'
 import axios from 'axios'
+
 
 class Profile extends Component {
     constructor(props) {
@@ -14,60 +16,65 @@ class Profile extends Component {
         componentDidMount() {
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'superadmin_576a0a1284a853b56f50e876273cdadbfd8ec13408223f1492617a75399921c4'
+                'Authorization': localStorage.getItem('token')
               }
             const id = localStorage.getItem("id");
-          axios.get('http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080/user/'+ id ,{headers})
+          axios.get('/user/'+ id ,{headers})
             .then(res => {
                 console.log(res)
               const users = res.data;
               this.setState({ users });
             })
-        } 
+        }
+        exit = (e) => {
+            localStorage.clear()
+          }; 
     render(){
-        const {fullname , username , email} = this.state.users;
+        const {fullname , username , email , amount , imageUrl ,phoneNumber} = this.state.users;
         return(
             <div className = "profile container">
                 <Tabs defaultIndex={0}>
                     <TabList>
                         <div className="name">
-                            <img src={UserIcon} alt=""/>
+                            <img src={imageUrl} alt="" style={{width: '160px',height: '160px', borderRadius: '50%'}}/>
                             <h2>{fullname}</h2>
-                            <h3>Autoprint user</h3>
+                            <h4 style={{fontWeight: 400, color:'#797979'}}>Autoprint user</h4>
                         </div>
                         <Tab>Profile</Tab>
                         <Tab>Update Profile</Tab>
-                        <Tab>Wallet</Tab>
-                        <Tab>History</Tab>
+                        <Tab>Update Password</Tab>
+                        <Tab>Add Wallet</Tab>
+                        <a href="/" onClick={this.exit}><p className="logout">Logout</p></a>
                     </TabList>
 
                     <TabPanel>
-                        <h2>My Profile</h2>
+                        <h3>My Profile</h3>
                         <div className="myprofile">
                             <div className="content">
                                 <div className="subcontent">
-                                    <h3>Fullname</h3>
-                                    <h3>{fullname? fullname : "n/a"}</h3>
+                                    <p>Fullname</p>
+                                    <p>{fullname? fullname : "n/a"}</p>
                                 </div>
                                 <div className="subcontent">
-                                    <h3>Username</h3>
-                                    <h3>{username}</h3>
+                                    <p>Username</p>
+                                    <p>{username}</p>
                                 </div>
                                 <div className="subcontent">
-                                    <h3>Email address</h3>
-                                    <h3>{email}</h3>
+                                    <p>Email address</p>
+                                    <p>{email}</p>
                                 </div>
                                 <div className="subcontent">
-                                    <h3>Mobile Number</h3>
+                                    <p>Phone Number</p>
+                                    <p>{phoneNumber}</p>
                                 </div>
                                 <div className="subcontent">
+                                    <p>Wallet</p>
+                                    <p>MYR {amount}</p>
+                                </div>
+                                {/* <div className="subcontent">
                                     <h3>Card Number</h3>
                                  
-                                </div>
-                                <div className="subcontent">
-                                    <h3>Address</h3>
-                                    <h3>n/a</h3>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="content2">
 
@@ -75,14 +82,16 @@ class Profile extends Component {
                         </div>
                     </TabPanel>
                     <TabPanel>
-                        <h2>Update Profile</h2>
+                        <h3>Update Profile</h3>
                         <Editprofile />
                     </TabPanel>
                     <TabPanel>
-                        <h2>Wallet</h2>
+                        <h3>Update Password</h3>
+                        <UpdatePassword />
                     </TabPanel>
                     <TabPanel>
-                        <h2>History</h2>
+                        <h3>Add Wallet</h3>
+                        <Topup />
                     </TabPanel>
                 </Tabs>
             </div>

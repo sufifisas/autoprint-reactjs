@@ -22,7 +22,7 @@ class Login extends Component {
         
 		e.preventDefault()
 		axios
-			.post('http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080/login', {username , password })
+			.post('/login', {username , password })
 			.then(response => {
                 console.log(response.data);
                 if(response.status === 200 && response.data.type === "USER"){
@@ -79,13 +79,13 @@ class Login extends Component {
 			
                 <Popup overlayStyle={overlay} contentStyle={content} trigger={<button className="button"> Login </button>} modal>
                     {close => (
-                    <div className="modal">
+                    <div className="modal1">
                         <span className="close" onClick={close}>
                         &times;
                         </span>
                         <div className="modal-login">
                             <h2>Welcome Back!</h2>
-                            <form onSubmit={this.submitHandler}>
+                            <form onSubmit={this.submitHandler}  autoComplete="off">
                                 <div>
                                     <input
                                         type="text"

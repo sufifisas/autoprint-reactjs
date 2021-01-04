@@ -15,15 +15,15 @@ class Landingheader extends Component {
     return (  
       <div className="header" id="header" style={home}>
       <div className="container"> 
-        <span className="logo" style={{position: "absolute"}}>
+        <span className="logo" style={{position: "absolute", width:"40%"}}>
         <Link to='/'>
           <img src={Logo} alt="" style={bigLogo}/></Link>
         </span>
         <nav>
             <ul>
-              <li>Home</li>
+              {/* <li>Home</li>
               <li>About</li>
-              <li>Contact</li>
+              <li>Contact</li> */}
             </ul>
             <Login />
         </nav>

@@ -8719,6 +8719,18 @@ react-error-overlay@^6.0.7:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
+react-geocode@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-geocode/-/react-geocode-0.2.2.tgz#24b50366daf57fc22d7884ab2e5927aa3d17ce2e"
+  integrity sha512-z0fD9TNyn8lXe1+cWr7Gx3Mi2751CjLLHIkMOkBN1HMmE6vxNoQEW/2y5sMkcpkwoleUeuERTaHFea7XGgJ3rw==
+  dependencies:
+    regenerator-runtime "^0.13.3"
+
+react-google-location@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-google-location/-/react-google-location-1.2.2.tgz#7b158f4762dcd4f95b9666d70114c4e93d11b82d"
+  integrity sha512-eGZRPLtacKHUwEEWT4tYszv0d6HgfrFwPFvx7v7k3+2uxZ93D+4vmEG9VxZD1uAMiqNvos0RTiy7gZGkZpWjNA==
+
 react-is@^16.12.0, react-is@^16.6.0, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -8729,10 +8741,10 @@ react-lifecycles-compat@^3.0.0:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-modal@^3.11.2:
-  version "3.11.2"
-  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.11.2.tgz#bad911976d4add31aa30dba8a41d11e21c4ac8a4"
-  integrity sha512-o8gvvCOFaG1T7W6JUvsYjRjMVToLZgLIsi5kdhFIQCtHxDkA47LznX62j+l6YQkpXDbvQegsDyxe/+JJsFQN7w==
+react-modal@^3.12.1:
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-3.12.1.tgz#38c33f70d81c33d02ff1ed115530443a3dc2afd3"
+  integrity sha512-WGuXn7Fq31PbFJwtWmOk+jFtGC7E9tJVbFX0lts8ZoS5EPi9+WWylUJWLKKVm3H4GlQ7ZxY7R6tLlbSIBQ5oZA==
   dependencies:
     exenv "^1.2.0"
     prop-types "^15.5.10"

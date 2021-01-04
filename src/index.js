@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.js';
 import * as serviceWorker from './serviceWorker';
+import axios from 'axios'
 
+axios.defaults.baseURL = 'http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080'
 ReactDOM.render(
   <React.StrictMode>
     <App />

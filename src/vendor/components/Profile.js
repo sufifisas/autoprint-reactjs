@@ -1,36 +1,40 @@
 import React,{Component} from 'react'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import UserIcon from '../../img/user.png'
-import Editprofile from '../../vendor/components/Editprofile'
+import Editprofile from './Editprofile'
 import axios from 'axios'
 
 class Profile extends Component {
     constructor(props) {
         super(props)
                this.state = {
-                vendors: {}
+                vendors: {},
+                user:{}
               }
             }
         componentDidMount() {
             const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': 'superadmin_576a0a1284a853b56f50e876273cdadbfd8ec13408223f1492617a75399921c4'
+                'Authorization': localStorage.getItem('token')
               }
-            const id = localStorage.getItem("id");
-          axios.get('https://backend-dot-autoprint-backend.et.r.appspot.com/vendor/'+ id ,{headers})
-            .then(res => {
-              const vendors = res.data;
-              this.setState({ vendors });
-            })
+            const id = localStorage.getItem("vendorId");
+            axios.get('/vendor/'+ id , {headers})
+                .then(res => {
+                    console.log(res, "user")
+                const vendors = res.data;
+                const user = res.data.user
+                this.setState({ vendors });
+                this.setState({ user })
+                })
         } 
     render(){
-        const {vendorname , username , email} = this.state.vendors;
+        const {vendorname, longitude, latitude} = this.state.vendors;
+        const {username, phoneNumber, email, fullname ,imageUrl } = this.state.user;
         return(
             <div className = "profile">
                 <Tabs defaultIndex={0}>
                     <TabList>
                         <div className="name">
-                            <img src={UserIcon} alt=""/>
+                            <img style={{borderRadius: '50%', height: '150px', width: '150px'}}src={imageUrl} alt=""/>
                             <h2>{vendorname}</h2>
                             <h3>Autoprint vendor</h3>
                         </div>
@@ -48,6 +52,10 @@ class Profile extends Component {
                                     <h3>{vendorname? vendorname : "n/a"}</h3>
                                 </div>
                                 <div className="subcontent">
+                                    <h3>Fullname</h3>
+                                    <h3>{fullname? fullname : "n/a"}</h3>
+                                </div>
+                                <div className="subcontent">
                                     <h3>Username</h3>
                                     <h3>{username}</h3>
                                 </div>
@@ -57,20 +65,14 @@ class Profile extends Component {
                                 </div>
                                 <div className="subcontent">
                                     <h3>Mobile Number</h3>
-                                    <h3>n/a</h3>
+                                    <h3>{phoneNumber}</h3>
                                 </div>
                                 <div className="subcontent">
-                                    <h3>Card Number</h3>
-                                    <h3>n/a</h3>
-                                </div>
-                                <div className="subcontent">
-                                    <h3>Address</h3>
-                                    <h3>n/a</h3>
+                                    <h3>Coordinate</h3>
+                                    <h3>( {latitude} , {longitude} )</h3>
                                 </div>
                             </div>
-                            <div className="content2">
-
-                            </div>
+                            
                         </div>
                     </TabPanel>
                     <TabPanel>

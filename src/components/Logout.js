@@ -3,9 +3,7 @@ import { withRouter } from "react-router-dom";
 
 class Logout extends Component {
   exit = (e) => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("type");
-    localStorage.removeItem("id");
+    localStorage.clear()
   };
 
   render() {

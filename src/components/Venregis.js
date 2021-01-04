@@ -7,7 +7,8 @@ class Venregis extends Component {
         super(props)
 
 		this.state = {
-			username: '',
+            username: '',
+            fullname: '',
             password: '', 
             email: '',
             vendorname: ''   
@@ -26,12 +27,12 @@ class Venregis extends Component {
           }
 		e.preventDefault()
 		axios
-			.post('https://backend-dot-autoprint-backend.et.r.appspot.com/vendor', this.state , {headers})
+			.post('/vendor', this.state , {headers})
 			.then(response => {
                 console.log(response);
                 if(response.status === 200){
                     alert("registration success")
-                    
+                    window.location.reload()
                 }        
 			})
 			.catch(error => {
@@ -41,7 +42,7 @@ class Venregis extends Component {
 
 	render() {
         
-        const { username, password, email, vendorname  } = this.state;
+        const { username, password, email, vendorname , fullname } = this.state;
         const overlay = {
             background: "rgba(136, 96, 208, 0.8)" 
         };
@@ -58,7 +59,7 @@ class Venregis extends Component {
 			
                 <Popup overlayStyle={overlay} contentStyle={content} trigger={<button className="button"> Be a Partner </button>} modal>
                     {close => (
-                    <div className="modal">
+                    <div className="modal1">
                         <span className="close" onClick={close}>
                         &times;
                         </span>
@@ -89,6 +90,15 @@ class Venregis extends Component {
                                         name="email"
                                         placeholder="Email address"
                                         value={email}
+                                        onChange={this.changeHandler}
+                                    />
+                                </div>
+                                <div>
+                                    <input
+                                        type="text"
+                                        name="fullname"
+                                        placeholder="Fullname"
+                                        value={fullname}
                                         onChange={this.changeHandler}
                                     />
                                 </div>

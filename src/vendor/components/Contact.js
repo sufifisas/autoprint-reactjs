@@ -25,7 +25,7 @@ class Contact extends Component {
           }
         e.preventDefault()
 		axios
-			.post('https://backend-dot-autoprint-backend.et.r.appspot.com/activity', this.state , {headers})
+			.post('/activity', this.state , {headers})
 			.then(response => {
                 console.log(response);
                 if(response.status === 200){
@@ -34,7 +34,8 @@ class Contact extends Component {
                 }        
 			})
 			.catch(error => {
-				console.log(error)
+				alert(error.response.data.message)
+                console.log(error.response.data)
 			})
     }
     

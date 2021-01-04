@@ -1,31 +1,25 @@
-import React,{ Component } from 'react'
+import React,{ useState } from 'react'
 import axios from 'axios'
 import ContactBg from '../../img/contact.png'
 
-class Contact extends Component {
+function Contact() {
 
-    constructor(props) {
-        super(props)
+    const[content, setContent] = useState('')
+    const[title, setTitle] = useState('')
+    
 
-		this.state = {
-			title: '',
-            content: '',    
+	const submitHandler = e => {
+        const details = {
+            content : content,
+            title : title
         }
-        
-    }
-
-	changeHandler = e => {
-		this.setState({ [e.target.name]: e.target.value })
-	}
-
-	submitHandler = e => {
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
           }
         e.preventDefault()
 		axios
-			.post('https://backend-dot-autoprint-backend.et.r.appspot.com/activity', this.state , {headers})
+			.post('/activity', details , {headers})
 			.then(response => {
                 console.log(response);
                 if(response.status === 200){
@@ -36,12 +30,9 @@ class Contact extends Component {
 			.catch(error => {
 				console.log(error)
 			})
-    }
-    
-    render(){
-        const { title, content  } = this.state;
+        }
         return(
-            <div className="contact container">
+            <div className="contact">
                 <div className="contact-body">
                     <div className="body1">
                         <div className="contact-text">
@@ -49,16 +40,14 @@ class Contact extends Component {
                             <h3>Have a question or problem? Please fill up the form below and we will reply back soonest!</h3>
                             <div className="line"></div>
                         </div>
-                        <form onSubmit={this.submitHandler}>
+                        <form onSubmit={submitHandler}>
                             <div className="content">
                                 <p>Subject</p>
-                                <input type="text" placeholder="Please state the subject here" name="title" value={title}
-                                        onChange={this.changeHandler} />
+                                <input type="text" placeholder="Please state the subject here" name="title" onChange={e => setTitle(e.target.value)} />
                             </div>
                             <div className="content">
                                 <p>Description</p>
-                                <textarea type="text" placeholder="Please write down the description here" name="content" value={content}
-                                        onChange={this.changeHandler}/>
+                                <textarea type="text" placeholder="Please write down the description here" name="content" onChange={e => setContent(e.target.value)}/>
                             </div>
                             <div className="contact-button">
                                 <button type="submit" className="send">Submit</button>
@@ -71,7 +60,6 @@ class Contact extends Component {
                 </div>
             </div>
         );
-    }
 }
 
 export default Contact;
