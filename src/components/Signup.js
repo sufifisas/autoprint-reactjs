@@ -26,7 +26,7 @@ class Signup extends Component {
           }
 		e.preventDefault()
 		axios
-			.post('http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080/user', this.state , {headers})
+			.post('/user', this.state , {headers})
 			.then(response => {
                 console.log(response);
                 if(response.status === 200){

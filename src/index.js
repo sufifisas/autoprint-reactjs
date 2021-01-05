@@ -4,7 +4,7 @@ import App from './App.js';
 import * as serviceWorker from './serviceWorker';
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080'
+axios.defaults.baseURL = 'https://5ce52c5d8ea5.ngrok.io'
 ReactDOM.render(
   <React.StrictMode>
     <App />

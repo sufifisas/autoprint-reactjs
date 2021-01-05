@@ -23,7 +23,7 @@ function Test() {
           console.log(data.username)
 		e.preventDefault()
 		axios
-			.post('http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080/user', data , {headers})
+			.post('/user', data , {headers})
 			.then(response => {
                 console.log(response.data);
                 if(response.status === 200){

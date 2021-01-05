@@ -30,7 +30,7 @@ class User extends Component {
         'Authorization': 'superadmin_576a0a1284a853b56f50e876273cdadbfd8ec13408223f1492617a75399921c4'
       }
     const id = localStorage.getItem("id");
-    axios.get('http://ec2-54-254-162-215.ap-southeast-1.compute.amazonaws.com:8080/user/'+ id ,{headers})
+    axios.get('/user/'+ id ,{headers})
     .then(res => {
         localStorage.setItem("wallet",res.data.amount)
     }) 
