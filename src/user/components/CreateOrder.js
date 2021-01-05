@@ -8,7 +8,7 @@ function Order() {
 
     const submitHandler = e => {
         e.preventDefault()
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GMAP_KEY}`)
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDxgA4kIuo0-bxfSaqCOCwmlyjnV05oVPE`)
         .then(response => response.json())
         .then(data => {
             const coordinates = {
