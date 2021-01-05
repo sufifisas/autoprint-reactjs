@@ -1,6 +1,5 @@
 import React ,{useState} from 'react'
 import axios from 'axios'
-import Paypal from './Paypal'
 
 function Topup() {
     const [amount, setAmount] = useState()
@@ -74,7 +73,7 @@ function Topup() {
                     </button>
                 </div>
                 <div className="paypal"></div>
-                {/* <button onClick={addwallet} type="submit" className="send" style={{backgroundColor:"#5680E9", borderRadius:"0" ,width: '70%', marginTop:'40px'}}>Topup</button> */}
+                <button onClick={addwallet} type="submit" className="send" style={{backgroundColor:"#5680E9", borderRadius:"0" ,width: '70%', marginTop:'40px'}}>Topup</button>
             </div>
         </div>
     )

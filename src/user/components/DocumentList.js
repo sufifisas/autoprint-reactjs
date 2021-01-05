@@ -8,22 +8,23 @@ function DocumentList() {
         'Authorization': localStorage.getItem("token")
       }
     const [list, setList] = useState([])
-    const [OrderId, setOrderId] = useState(localStorage.getItem("OrderId"));
     const [amount, setAmount] = useState([])
 
     useEffect(() => {
-      
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem("token")
+      }
         axios
-        .get(`/document/order/${OrderId}`,{headers})
+        .get(`/document/order/${localStorage.getItem("OrderId")}`,{headers})
         .then(response => {
                   setList(response.data.content)
-                  console.log(response)
                   })
         .catch(error => {
           console.log(error)
               })
         axios
-        .post(`/order/${OrderId}/pre/confirm`,{} ,{headers})
+        .post(`/order/${localStorage.getItem("OrderId")}/pre/confirm`,{} ,{headers})
         .then(response => {
             if(response.status === 200){  
               setAmount(response.data.amount)

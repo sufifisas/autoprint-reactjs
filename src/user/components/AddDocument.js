@@ -14,8 +14,8 @@ function AddDocument(){
     const status = localStorage.getItem("OrderStatus");
     const id = localStorage.getItem("OrderId")
     const date = localStorage.getItem("OrderDate")
-    const [coverColour, setCoverColour] = useState('')
-    const [coverType, setCoverType] = useState('') 
+    // const [coverColour, setCoverColour] = useState('')
+    // const [coverType, setCoverType] = useState('') 
 
     const submitHandler = e => {
         const details = {

@@ -2,13 +2,14 @@ import React,{useEffect,useState} from 'react'
 import axios from 'axios'
 
 function Activity() {
-    const headers = {
+    
+    const [list, setList] = useState([])
+    useEffect(() => {
+      const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem("token")
       }
-    const [list, setList] = useState([])
-    useEffect(() => {
-        axios
+      axios
 			.get(`/activity/user/${localStorage.getItem("id")}`,{headers})
 			.then(response => {
                 setList(response.data.content)

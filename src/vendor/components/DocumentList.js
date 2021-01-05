@@ -7,15 +7,18 @@ function DocumentList() {
         'Authorization': localStorage.getItem("token")
       }
     const [list, setList] = useState([])
-    const [OrderId, setOrderId] = useState(localStorage.getItem("OrderId"));
+    const OrderId = localStorage.getItem("OrderId");
     const [amount, setAmount] = useState()
     const [rej, setRej] = useState(false)
     const [reason, setReason] = useState('')
 
     useEffect(() => {
-      
+      const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': localStorage.getItem("token")
+      }
         axios
-        .get(`/document/order/${OrderId}`,{headers})
+        .get(`/document/order/${localStorage.getItem("OrderId")}`,{headers})
         .then(response => {
                   setList(response.data.content)
                   console.log(response)
@@ -25,7 +28,7 @@ function DocumentList() {
               })
         
         axios
-        .get(`/order/${OrderId}`,{headers})
+        .get(`/order/${localStorage.getItem("OrderId")}`,{headers})
         .then(response => {
                   setAmount(response.data.invoices[0].amount)
                   console.log(response,"order")

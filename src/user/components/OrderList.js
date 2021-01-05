@@ -3,13 +3,15 @@ import axios from 'axios'
 import {Link} from 'react-router-dom'
 
 function OrderList() {
-    const headers = {
+    
+    const [list, setList] = useState([])
+
+    useEffect(() => {
+      const headers = {
         'Content-Type': 'application/json',
         'Authorization': localStorage.getItem("token")
       }
-    const [list, setList] = useState([])
-    useEffect(() => {
-        axios
+      axios
 			.get(`/order/user/${localStorage.getItem("id")}`,{headers})
 			.then(response => {
                 console.log(response)

@@ -12,8 +12,12 @@ function Printer() {
       }
 
     useEffect(() => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem("token")
+          }
         axios
-        .get(`/printer/vendor/${vendorId}`,{headers})
+        .get(`/printer/vendor/${localStorage.getItem("vendorId")}`,{headers})
         .then(response => {
             console.log(response);
             setList(response.data.content)

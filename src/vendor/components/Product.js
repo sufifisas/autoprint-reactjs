@@ -23,7 +23,7 @@ function Product() {
                 })
 
         axios
-        .get(`/product/vendor/vendors/${vendorId}`)
+        .get(`/product/vendor/vendors/${localStorage.getItem("vendorId")}`)
         .then(response => {
             console.log(response,"all");
             setList(response.data.content)
