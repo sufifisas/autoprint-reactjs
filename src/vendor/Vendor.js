@@ -10,6 +10,8 @@ import Vendorside from "./components/Vendorside";
 import Document from './components/Document'
 import Printer from './components/Printer'
 import Product from './components/Product'
+import Activity from './components/Activity'
+import Home from './components/Home'
 import {
   BrowserRouter as Router,
   Switch,
@@ -48,21 +50,20 @@ class Vendor extends Component {
       <div>
         <Router>
           <div className="app">
-            <div className="index">
               <Vendorheader />
-              <div className="side">
+              <div className="index container-lg vendor">
                 <Vendorside />
-                <div className="vendorcont">
                   <Switch>
+                    <Route path ="/vendor/"  exact component={Home} />
                     <Route path ="/vendor/order"  exact component={Order} />
-                    <Route path="/vendor/order/document" component={Document} />
+                    <Route path="/vendor/order/:id" component={Document} />
                     <Route path ="/vendor/printer"  exact component={Printer} />
                     <Route path ="/vendor/product"  exact component={Product} />
                     <Route path="/vendor/contact" exact component={Contact} />
+                    <Route path="/vendor/activity" exact component={Activity} />
+
                     <Route path="/vendor/profile" exact component={Profile} />
                   </Switch>
-                </div>
-              </div>
             </div>
             <Footer color="#8860D0"/>
           </div>

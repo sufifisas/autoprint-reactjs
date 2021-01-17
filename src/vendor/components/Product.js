@@ -1,108 +1,85 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Update from "./ProductModal";
+import Loader from "./Loader";
+import Add from './AddProductModal'
 
 function Product() {
-    const [product, setProduct] = useState([])
-    const [list, setList] = useState([])
-    const [price, setPrice] = useState(0)
-    const vendorId = localStorage.getItem("vendorId")
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem("token")
-      }
+  const [loading, setLoading] = useState(true);
+  const [list, setList] = useState([]);
 
-    useEffect(() => {
-        axios
-        .get(`/product/all`)
-        .then(response => {
-            console.log(response,"product");
-            setProduct(response.data.content)
-        })
-        .catch(error => {
-            console.log(error);
-                })
+  useEffect(() => {
+    axios
+      .get(`/product/vendor/vendors/${localStorage.getItem("vendorId")}`)
+      .then((response) => {
+        console.log(response, "all");
+        setList(response.data.content);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-        axios
-        .get(`/product/vendor/vendors/${localStorage.getItem("vendorId")}`)
-        .then(response => {
-            console.log(response,"all");
-            setList(response.data.content)
-        })
-        .catch(error => {
-            console.log(error);
-                })        
-    },[])
 
-    const add = (item) => {
-        
-        const body = {
-                price: price,
-                productId: item,
-                vendorId: vendorId
-        }
-        console.log(item)
-        axios
-        .post(`/product/vendor`, body, {headers})
-        .then(response => {
-            console.log(response,"added");
-            alert(`Product ${item} has been added`)
-            window.location.reload()
-        })
-        .catch(error => {
-            alert(error.response.data.message)
-            console.log(error.response.data)
-        })
-    }
-
-    const update = (id, status) => {
-        
-        const body = {
-                price: price,
-                active: status,
-        }
-        axios
-        .put(`/product/vendor/${id}`, body, {headers})
-        .then(response => {
-            console.log(response,"updated");
-            alert(`Product ${id} has been updated`)
-            window.location.reload()
-        })
-        .catch(error => {
-            alert(error.response.data.message)
-            console.log(error.response.data)
-        })
-    }
-    
-    return(
+  return (
+    <div className="vendor-site">
+      {loading && <Loader />}
+      {!loading && (
         <div>
-            Available Product
-            {product.map((item, i) => {
-                    return(
-                        <ul key= {i}>
-                            <li>{item.id}</li>
-                            <li>{item.productName}</li>
-                            <input type="text" onChange={e => setPrice(e.target.value)}/>
-                            <button onClick={() => add(item.id)}>Add</button>
-                        </ul>
-                    )
-                })}
-
-            <div>
-                Your Product
-                {list.map((item, i) => {
-                    return(
-                        <ul key= {i}>
-                            <li>{item.product.productName}</li>
-                            <li>{item.price}</li>
-                            <li>{item.active?'active':'Inactive'}</li>
-                            <input type="text" onChange={e => setPrice(e.target.value)}/>
-                            <button onClick={() => update(item.id, item.active)}>Update</button>
-                        </ul>
-                    )
-                })}
+          <div className="vendor-title">
+            <h3>Product list</h3>
+          </div>
+          <div>
+            <div className="product-wrap">
+                
+                <div className="product-content">
+                  {list.length > 0 ? (
+                    <div>
+                        <div className='add'><Add title="List of product"/></div>
+                      <ul className="product-header">
+                        <li className="col-7">Product name</li>
+                        <li className="col-2">Status</li>
+                        <li className="col-2">Price</li>
+                        <li className="col-1"></li>
+                      </ul>
+                      {list.map((item, i) => {
+                        return (
+                          <ul key={i} className="product-list">
+                            <li className="col-7">
+                              {item.product.productName}
+                            </li>
+                            <li className="col-2">
+                              {item.active ? "active" : "Inactive"}
+                            </li>
+                            <li className="col-2">MYR{item.price}</li>
+                            <li className="col-1">
+                              <Update
+                                price={item.price}
+                                name={item.product.productName}
+                                id={item.id}
+                                active={item.active}
+                                title={item.product.productName}
+                              />
+                            </li>
+                          </ul>
+                        );
+                      })}
+                    </div>
+                  ) : (
+                    <div className="content-center">
+                        
+                        <Add title="List of product"/>
+                        <p>Please add product and printer to start receiving order</p>
+                    </div>
+                  )}
+                </div>
             </div>
+          </div>
         </div>
-    )
+      )}
+    </div>
+  );
 }
 
 export default Product;

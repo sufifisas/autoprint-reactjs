@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Logo from '../img/logo-02.png'
 import Login from './Login'
+import LoginModal from './LoginModal'
 
 class Landingheader extends Component {
   render(){
     const home = {
       backgroundColor: "transparent",
-      position: "absolute"
+      position: "absolute",
+      padding: '20px 0px'
     };
     const bigLogo = {
       width : "25%",
@@ -25,7 +27,7 @@ class Landingheader extends Component {
               <li>About</li>
               <li>Contact</li> */}
             </ul>
-            <Login />
+            <LoginModal title="welcome back!"/>
         </nav>
       </div>
     </div>

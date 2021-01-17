@@ -1,102 +1,97 @@
-import React,{Component} from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React,{useState, useEffect} from 'react'
 import Editprofile from '../../user/components/Editprofile'
 import UpdatePassword from '../../user/components/UpdatePassword'
 import Topup from '../../user/components/Topup'
 import axios from 'axios'
+import Banner from './Banner'
+import userimg from '../../img/user.jpg'
+import profile from '../../img/banner.jpg'
+import Loader from './Loader'
+import TopupModal from './TopupModal'
 
 
-class Profile extends Component {
-    constructor(props) {
-        super(props)
-               this.state = {
-                users: {}
-              }
-            }
-        componentDidMount() {
+function Profile() {
+        const [loading, setLoading] = useState(true)
+        const [user, setUser] = useState([]);
+        useEffect(() => {
             const headers = {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
               }
             const id = localStorage.getItem("id");
-          axios.get('/user/'+ id ,{headers})
-            .then(res => {
-                console.log(res)
-              const users = res.data;
-              this.setState({ users });
-            })
-        }
-        exit = (e) => {
-            localStorage.clear()
-          }; 
-    render(){
-        const {fullname , username , email , amount , imageUrl ,phoneNumber} = this.state.users;
+            axios.get('/user/'+ id ,{headers})
+                .then(res => {
+                    setUser(res.data)
+                    setLoading(false)
+                })
+                .catch(error => {
+                    console.log(error.response.data)
+                        })
+        },[])
+            const exit = () => {
+                localStorage.clear()
+            }; 
+
         return(
-            <div className = "profile container">
-                <Tabs defaultIndex={0}>
-                    <TabList>
-                        <div className="name">
-                            <img src={imageUrl} alt="" style={{width: '160px',height: '160px', borderRadius: '50%'}}/>
-                            <h2>{fullname}</h2>
-                            <h4 style={{fontWeight: 400, color:'#797979'}}>Autoprint user</h4>
-                        </div>
-                        <Tab>Profile</Tab>
-                        <Tab>Update Profile</Tab>
-                        <Tab>Update Password</Tab>
-                        <Tab>Add Wallet</Tab>
-                        <a href="/" onClick={this.exit}><p className="logout">Logout</p></a>
-                    </TabList>
-
-                    <TabPanel>
-                        <h3>My Profile</h3>
-                        <div className="myprofile">
-                            <div className="content">
-                                <div className="subcontent">
-                                    <p>Fullname</p>
-                                    <p>{fullname? fullname : "n/a"}</p>
+            <div>
+                 {loading && <Loader />}
+                 {!loading && 
+                    <div>
+                        <Banner title=""/>
+                        <div className = "profile-center">
+                            <div className="profile">
+                                <div className="profile-main text-center" style={{backgroundImage:`url(${profile})`}}>
+                                    <div className="profile-opac">
+                                        <h2>PROFILE</h2>
+                                        <img src={user.imageUrl?user.imageUrl:userimg} alt="" style={{width: '140px',height: '140px', borderRadius: '50%' }}/>
+                                        <div className="profile-avatar">
+                                            <h3>{user.fullname}</h3>
+                                            <p>Autoprint User</p>
+                                        </div>
+                                        <UpdatePassword title="change password"/>
+                                        <Editprofile title="edit profile"/>
+                                        <div className="profile-content row text-left">
+                                            <ul className="profile-list col-8">
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Username</li>
+                                                        <li className="col-9">{user.username}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Email address</li>
+                                                        <li className="col-9">{user.email}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Phone number</li>
+                                                        <li className="col-9">{user.phoneNumber}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Current balance</li>
+                                                        <li className="col-9"><div className="wallet-text"><span>MYR {Number.parseFloat(user.amount).toFixed(2)}</span><TopupModal /></div></li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Account status</li>
+                                                        <li className="col-9">Active</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="subcontent">
-                                    <p>Username</p>
-                                    <p>{username}</p>
-                                </div>
-                                <div className="subcontent">
-                                    <p>Email address</p>
-                                    <p>{email}</p>
-                                </div>
-                                <div className="subcontent">
-                                    <p>Phone Number</p>
-                                    <p>{phoneNumber}</p>
-                                </div>
-                                <div className="subcontent">
-                                    <p>Wallet</p>
-                                    <p>MYR {amount}</p>
-                                </div>
-                                {/* <div className="subcontent">
-                                    <h3>Card Number</h3>
-                                 
-                                </div> */}
                             </div>
-                            <div className="content2">
-
-                            </div>
                         </div>
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Update Profile</h3>
-                        <Editprofile />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Update Password</h3>
-                        <UpdatePassword />
-                    </TabPanel>
-                    <TabPanel>
-                        <h3>Add Wallet</h3>
-                        <Topup />
-                    </TabPanel>
-                </Tabs>
+                    </div>
+                    }
             </div>
         );
     }
-}
 
 export default Profile;

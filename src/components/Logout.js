@@ -10,7 +10,7 @@ class Logout extends Component {
     if(localStorage.getItem("type") === "VENDOR"){
       return <a href="/" onClick={this.exit}><button style = {{borderColor:"#8860D0", color:"#8860D0"}}>Log Out</button></a>
     }
-    return <a href="/" onClick={this.exit}><button>Log Out</button></a>;
+    return <a href="/" onClick={this.exit}><button style = {{borderColor:"#5680E9", color:"#5680E9"}}>Log Out</button></a>;
   }
 }
 

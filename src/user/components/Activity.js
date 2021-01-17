@@ -1,8 +1,10 @@
 import React,{useEffect,useState} from 'react'
 import axios from 'axios'
+import Loader from './Loader'
+import Banner from './Banner'
 
 function Activity() {
-    
+    const [loading, setLoading] = useState(true)
     const [list, setList] = useState([])
     useEffect(() => {
       const headers = {
@@ -12,7 +14,9 @@ function Activity() {
       axios
 			.get(`/activity/user/${localStorage.getItem("id")}`,{headers})
 			.then(response => {
+             console.log(response.data.content)
                 setList(response.data.content)
+                setLoading(false)
                 })
 			.catch(error => {
 				console.log(error)
@@ -21,16 +25,33 @@ function Activity() {
     
     return (
         <div>
-            <h1 style={{marginBottom: '20px'}}>Notification</h1>
-           {list.map((item, i) => {
-          return (
-          <ul key= {i} className="orderlist">
-            <li>{item.id}</li>
-            <li style={{width: '25% '}}>{item.title}</li>
-            <li style={{width: '45% '}}>{item.content}</li>
-            </ul>
-          )
-        })}
+          {loading && <Loader />}
+          {!loading && 
+            <div>
+              <Banner title="activity"/>
+              <div className="container-lg">
+                <div className="list-bg">
+                  <ul className="list-header row pt-4 pb-3 mb-0">
+                    <li className="col-2">Reference Id</li>
+                    <li className="col-3">Title</li>
+                    <li className="col-5">Content</li>
+                    <li className="col-2">Type</li>
+                  </ul>
+                  {list.map((item, i) => {
+                    return (
+                    <ul key= {i} className="orderlist row">
+                      <li className="col-2">{item.referenceId}</li>
+                      <li className="col-3">{item.title}</li>
+                      <li className="col-5">{item.content}</li>
+                      <li className="col-2">{item.type}</li>
+                      </ul>
+                    )
+                  })}
+                </div>
+              </div>
+            </div>
+          }
+          
         </div>
     )
 }

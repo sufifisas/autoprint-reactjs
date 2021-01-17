@@ -3,6 +3,8 @@ import Image from '../img/home.png'
 import Background from '../img/bg1.png'
 import Signup from './Signup'
 import Venregis from './Venregis'
+import SignupModal from './SignUpModal'
+import SignUpVen from './SignUpVen'
 
 
 function Home() {
@@ -14,9 +16,9 @@ function Home() {
               <div className="title">
                 <h1>Print anything from anywhere at anytime</h1>
                 <p>Discover the platform that gives you the freedom to print any documents, image or design with unlimited number and time.</p>
-                <div className="home-button">
-                  <Signup />
-                  <Venregis />
+                <div className="home-button" style={{display:'flex'}}>
+                  <SignupModal title="Register now!"/>
+                  <SignUpVen title="Be our partner!" />
                 </div>
               </div>
             </div>

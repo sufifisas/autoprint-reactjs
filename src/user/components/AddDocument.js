@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import Modal from './Modal'
+import { Roller } from 'react-awesome-spinners'
 
 function AddDocument(){
     const [toggler, setToggler] = useState(false);
@@ -7,13 +9,17 @@ function AddDocument(){
     const [filename, setFilename] = useState('');
     const [pages, setPages] = useState('');
     const [colour, setColour] = useState('AUTO');
-    const [copies, setCopies] = useState(0);
+    const [copies, setCopies] = useState(1);
     const [duplex, setDuplex] = useState('NO_DUPLEX');
     const [pageOrientation, setPageOrentation] = useState('AUTO')
     const [showData, setShow] = useState(false);
     const status = localStorage.getItem("OrderStatus");
     const id = localStorage.getItem("OrderId")
     const date = localStorage.getItem("OrderDate")
+    const [text, setText] = useState('')
+    const [success, setSuccess] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const [result ,setResult] = useState(false)
     // const [coverColour, setCoverColour] = useState('')
     // const [coverType, setCoverType] = useState('') 
 
@@ -34,18 +40,23 @@ function AddDocument(){
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem("token")
         }
+        setLoading(true)
+        setSuccess(false)
+        setResult(false)
 		e.preventDefault()
 		axios
 			.post('/document', details, {headers})
 			.then(response => {
-                console.log(response,"post");
-                if(response.status === 200){
-                    alert("document uploaded") 
-                }  
-                window.location.reload(false);        
+                setLoading(false);
+                setSuccess(true)
+                setResult(true)
+                setText("Your Document has been uploaded")
+
 			})
 			.catch(error => {
-				console.log(error)
+                setLoading(false)
+                setResult(true)
+                setText(error.response.data.message)
             })
 	}
     
@@ -75,17 +86,17 @@ function AddDocument(){
     };
 
     const addDoc = () => {
-        if(status === "CANCELLED"){
-            alert("ORDER HAS BEEN CANCELLED. PLEASE REORDER")
-            setToggler(false)
-        }
-        else if(status === "CONFIRM"){
-            alert("ORDER HAS BEEN CONFIRMED. PLEASE CREATE NEW ORDER")
-            setToggler(false)
-        }
-        else (
+        // if(status === "CANCELLED"){
+        //     alert("ORDER HAS BEEN CANCELLED. PLEASE REORDER")
+        //     setToggler(false)
+        // }
+        // else if(status === "CONFIRM"){
+        //     alert("ORDER HAS BEEN CONFIRMED. PLEASE CREATE NEW ORDER")
+        //     setToggler(false)
+        // }
+        // else (
             setToggler(true)
-        )
+        // )
     }
     return(
         <div style={{padding:'20px', marginBottom:'20px', boxShadow: '#79797979 2px 2px 10px'}}>
@@ -117,7 +128,7 @@ function AddDocument(){
                             <option value="SHORT_EDGE">SHORT_EDGE</option>
                         </select></li>
                         <li><span><p>Pages</p></span><input type="text" placeholder="example: 1, 1-5" onChange={e => setPages(e.target.value)}/></li>
-                        <li><span><p>Copies</p></span><input type="number" placeholder="" onChange={e => setCopies(e.target.value)}/></li>
+                        <li><span><p>Copies</p></span><input type="number" placeholder="1" onChange={e => setCopies(e.target.value)}/></li>
                         <div style={{textAlign:'right',display:'flex',flexDirection:'row',justifyContent:'flex-end'}}>
                             <div onClick = {() => {setToggler(!toggler)}} className="send" style={{ cursor:'pointer', padding:'10px 40px', marginRight: '20px',height: '50px', border: '1px solid #5680E9' ,background: '#fff', color: '#5680E9'}}>Cancel</div>
                             <button type="submit" className="send" style={{ padding:'10px 40px', height: '50px', border: '1px solid #5680E9' ,background: '#5680E9', color: '#fff'}}>Upload</button>
@@ -125,7 +136,10 @@ function AddDocument(){
                     </form>       
                 </div>
             </div>
+            {loading && <div className="page-loader api"><Roller /></div>}
+            {result && <Modal desc={text} status={success}/>}
         </div>
+        
     );
 }
 

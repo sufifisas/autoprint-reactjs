@@ -9,15 +9,14 @@ class Vendorheader extends Component {
   render(){
   
   return (
-    <div className="header" id="header" style={{backgroundColor:"#fff",borderBottom:"#e9e9e9 2px solid"}}>
-      <div className="head" style={{padding:"10px 40px"}}>
+    <div className="header container-lg vendor" id="header">
+      <div className="head" style={{padding:"10px 0px"}}>
         
         <nav>
         
             <ul style={{marginLeft:'none', width:'100%'}}>
             <span className="logo" style={{position:"inherit"}}>
-            <Link to='/user'>
-              <img src={Purple} alt=""/></Link>
+              <img style={{width: '30%'}} src={Purple} alt=""/>
             </span>
               <Logout />
             </ul>

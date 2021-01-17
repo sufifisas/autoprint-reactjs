@@ -6,9 +6,7 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'https://5ce52c5d8ea5.ngrok.io'
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById('root')
 );
 

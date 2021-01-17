@@ -1,91 +1,126 @@
-import React,{Component} from 'react'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import React,{useState, useEffect} from 'react'
 import Editprofile from './Editprofile'
+import UpdatePassword from './UpdatePassword'
 import axios from 'axios'
+import userimg from '../../img/user.jpg'
+import profile from '../../img/banner.jpg'
+import Loader from './Loader'
+import Geocode from "react-geocode";
 
-class Profile extends Component {
-    constructor(props) {
-        super(props)
-               this.state = {
-                vendors: {},
-                user:{}
-              }
-            }
-        componentDidMount() {
+
+
+function Profile() {
+        const [loading, setLoading] = useState(true)
+        const [user, setUser] = useState([]);
+        const [vendor, setVendor] = useState([]);
+        const [add, setAdd] = useState('')
+
+        Geocode.setApiKey("AIzaSyDxgA4kIuo0-bxfSaqCOCwmlyjnV05oVPE");
+
+        useEffect(() => {
             const headers = {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
               }
             const id = localStorage.getItem("vendorId");
-            axios.get('/vendor/'+ id , {headers})
+            axios.get('/vendor/'+ id ,{headers})
                 .then(res => {
-                    console.log(res, "user")
-                const vendors = res.data;
-                const user = res.data.user
-                this.setState({ vendors });
-                this.setState({ user })
+                    setUser(res.data.user)
+                    setVendor(res.data)
+                    setLoading(false)
+                    console.log(res.data)
+                    Geocode.fromLatLng(res.data.latitude, res.data.longitude).then(
+                        response => {
+                            setAdd(response.results[0].formatted_address)
+                            console.log(response.results)
+                        },
+                        error => {
+                            console.error(error);
+                        }
+                        );
                 })
-        } 
-    render(){
-        const {vendorname, longitude, latitude} = this.state.vendors;
-        const {username, phoneNumber, email, fullname ,imageUrl } = this.state.user;
-        return(
-            <div className = "profile">
-                <Tabs defaultIndex={0}>
-                    <TabList>
-                        <div className="name">
-                            <img style={{borderRadius: '50%', height: '150px', width: '150px'}}src={imageUrl} alt=""/>
-                            <h2>{vendorname}</h2>
-                            <h3>Autoprint vendor</h3>
-                        </div>
-                        <Tab>Profile</Tab>
-                        <Tab>Update Profile</Tab>
-                        <Tab>History</Tab>
-                    </TabList>
+                .catch(error => {
+                    console.log(error.response.data)
+                        })
+            
+           
+        },[])
+            const exit = () => {
+                localStorage.clear()
+            }; 
 
-                    <TabPanel>
-                        <h2>My Profile</h2>
-                        <div className="myprofile">
-                            <div className="content">
-                                <div className="subcontent">
-                                    <h3>Vendor name</h3>
-                                    <h3>{vendorname? vendorname : "n/a"}</h3>
-                                </div>
-                                <div className="subcontent">
-                                    <h3>Fullname</h3>
-                                    <h3>{fullname? fullname : "n/a"}</h3>
-                                </div>
-                                <div className="subcontent">
-                                    <h3>Username</h3>
-                                    <h3>{username}</h3>
-                                </div>
-                                <div className="subcontent">
-                                    <h3>Email address</h3>
-                                    <h3>{email}</h3>
-                                </div>
-                                <div className="subcontent">
-                                    <h3>Mobile Number</h3>
-                                    <h3>{phoneNumber}</h3>
-                                </div>
-                                <div className="subcontent">
-                                    <h3>Coordinate</h3>
-                                    <h3>( {latitude} , {longitude} )</h3>
+        return(
+            <div className="vendor-site">
+                 {loading && <Loader />}
+                 {!loading && 
+                    <div>
+                        <div className = "profile-center">
+                            <div className="profile">
+                                <div className="profile-main text-center" >
+                                    <div className="profile-opac">
+                                        <h2>PROFILE</h2>
+                                        <img src={user.imageUrl?user.imageUrl:userimg} alt="" style={{width: '140px',height: '140px', borderRadius: '50%' }}/>
+                                        <div className="profile-avatar">
+                                            <h3>{user.fullname}</h3>
+                                            <p>Autoprint Vendor</p>
+                                        </div>
+                                        <UpdatePassword title="change password"/>
+                                        <Editprofile title="edit profile"/>
+                                        <div className="profile-content row text-left">
+                                            <ul className="profile-list col-9">
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Vendor name</li>
+                                                        <li className="col-9">{vendor.vendorname}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Username</li>
+                                                        <li className="col-9">{user.username}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Email address</li>
+                                                        <li className="col-9">{user.email}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Full name</li>
+                                                        <li className="col-9">{user.fullname}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Phone number</li>
+                                                        <li className="col-9">{user.phoneNumber ? user.phoneNumber : 'None'}</li>
+                                                    </ul>
+                                                </li>
+                                                
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Address</li>
+                                                        <li className="col-9">{add}</li>
+                                                    </ul>
+                                                </li>
+                                                <li className="each">
+                                                    <ul className="row">
+                                                        <li className="col-3">Account status</li>
+                                                        <li className="col-9">Active</li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            
                         </div>
-                    </TabPanel>
-                    <TabPanel>
-                        <h2>Update Profile</h2>
-                        <Editprofile />
-                    </TabPanel>
-                    <TabPanel>
-                        <h2>History</h2>
-                    </TabPanel>
-                </Tabs>
+                    </div>
+                    }
             </div>
         );
     }
-}
 
 export default Profile;

@@ -1,6 +1,7 @@
 import React, {useState , useEffect} from 'react'
 import axios from 'axios'
 import ConfirmDocument from './ConfirmDocument'
+import { Roller } from 'react-awesome-spinners'
 
 function DocumentList() {
     const headers = {
@@ -9,6 +10,7 @@ function DocumentList() {
       }
     const [list, setList] = useState([])
     const [amount, setAmount] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
       const headers = {
@@ -19,6 +21,7 @@ function DocumentList() {
         .get(`/document/order/${localStorage.getItem("OrderId")}`,{headers})
         .then(response => {
                   setList(response.data.content)
+                  setLoading(false)
                   })
         .catch(error => {
           console.log(error)
@@ -36,24 +39,14 @@ function DocumentList() {
         })
     },[]);
 
-    const del = (id) => {
-      console.log(id)
-      axios
-      .delete(`/document/${id}/cancel`,{headers})
-      .then(res => {
-        console.log(res)
-        alert("document successfully deleted")
-        window.location.reload()
-      })
-      .catch(error => {
-        console.log(error)
-      })
-    }
+    
     
     
     
     return (
         <div>
+          {loading && <div className="loading"><Roller /></div>}
+          {!loading && <div>
            {list.map((item, i) => {
           return (
           <div href={item.url} key= {i}>
@@ -73,7 +66,8 @@ function DocumentList() {
           
           {list[0] ? <ConfirmDocument /> : ''}
         </div>
-        
+        </div>
+        }
         </div>
     )
 }

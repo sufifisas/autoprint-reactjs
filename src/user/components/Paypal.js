@@ -1,37 +1,114 @@
-// import React from 'react'
+import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios'
+import { Roller } from 'react-awesome-spinners'
 
-// export default function Paypal(props) {
-//     window.paypal.Buttons({
-//         createOrder: function(data, actions) {
-//           // This function sets up the details of the transaction, including the amount and line item details.
-//           return actions.order.create({
-//             purchase_units: [{
-//               amount: {
-//                 value: props.value
-//               }
-//             }]
-//           });
-//         },
-//         onApprove: function(data, actions) {
-//           // This function captures the funds from the transaction.
-//           return actions.order.capture().then(function(details) {
-//             // This function shows a transaction success message to your buyer.
-//             alert('Transaction completed by ' + details.payer.name.given_name);
-//           });
-//         },
-//         style: {
-//           color: 'black',
-//           shape:  'rect',
-//           label:  'pay',
-//           height: 40,
-//           layout: 'horizontal'
-//       } 
-//       }).render('.paypal');
-//       //This function displays Smart Payment Buttons on your web page.
 
-//     return (
-//         <div>
-//              <div className="paypal"></div>
-//         </div>
-//     )
-// }
+function Product({ product }) {
+  const [paidFor, setPaidFor] = useState(false);
+  const [error, setError] = useState(null);
+  const paypalRef = useRef();
+  const [text,setText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [init, setInit] = useState(true)
+
+  useEffect(() => {
+    window.paypal
+      .Buttons({
+        createOrder: (data, actions) => {
+          return actions.order.create({
+            purchase_units: [
+              {
+                description: product.description,
+                amount: {
+                  currency_code: 'MYR',
+                  value: product.price,
+                },
+              },
+            ],
+          });
+        },
+        onApprove: async (data, actions) => {
+   
+          setLoading(true)
+          setSuccess(false)
+          const order = await actions.order.capture();
+          setInit(false)
+          setPaidFor(true);
+          console.log(order);
+          const details = {
+                addId: localStorage.getItem("id"),
+                amount: product.price,
+                operation: "ADD"
+            }
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+              }
+            axios
+            .post('/wallet/operation', details , {headers})
+            .then(response => {
+                console.log(response,"post");
+                if(response.status === 200){
+                    setText("Wallet has been successfully added")
+                    setLoading(false)
+                    setSuccess(true) 
+                    setInit(true)
+                }  
+                       
+            })
+            .catch(error => {
+                alert(error.response.data.message)
+                console.log(error.response.data)
+                setLoading(false) 
+            })
+        },
+        onError: err => {
+          setError(err);
+          console.error(err);
+        },
+      })
+      .render(paypalRef.current);
+  }, [product.description, product.price]);
+
+  if (paidFor) {
+    return (
+      <div>
+        {success && <p>Congrats, {text} for MYR {product.price}!</p>}
+        {loading && (
+            <div style={{padding:'40px'}}>
+                <Roller />
+            </div>
+            )}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {init && 
+      <div style={{padding:'20px'}}>
+      {error && <div>Uh oh, an error occurred! {error.message}</div>}
+      <p>
+        {product.description} for MYR{product.price}?
+      </p>
+      <div ref={paypalRef} />
+    </div>}
+    </div>
+  );
+}
+
+function Paypal(props) {
+  const product = {
+    price: props.amount,
+    description: 'Are you sure to add wallet',
+  };
+
+  return (
+    <div className="App">
+      <Product product={product} />
+    </div>
+  );
+}
+
+export default Paypal;

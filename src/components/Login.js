@@ -24,7 +24,6 @@ class Login extends Component {
 		axios
 			.post('/login', {username , password })
 			.then(response => {
-                console.log(response.data);
                 if(response.status === 200 && response.data.type === "USER"){
                     localStorage.setItem("id",response.data.id)
                     localStorage.setItem("token", response.data.token)
