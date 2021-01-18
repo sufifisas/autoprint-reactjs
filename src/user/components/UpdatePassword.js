@@ -159,7 +159,7 @@ export default function UpdatePassword(props) {
                     />
                     <TextField
                     id="outlined-password-input"
-                    label="Current Password"
+                    label="New Password"
                     type="password"
                     autoComplete="current-password"
                     onChange={(e) => setNewpass(e.target.value)}

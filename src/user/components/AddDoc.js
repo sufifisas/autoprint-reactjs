@@ -86,7 +86,6 @@ export default function AddDoc(props) {
         setLoading(true)
         setSuccess(false)
         setResult(false)
-        setShow(false)
         const token = localStorage.getItem("token")
         const id = localStorage.getItem("OrderId");
         const headers = {
@@ -113,6 +112,7 @@ export default function AddDoc(props) {
                 setSuccess(true)
                 setResult(true)
                 setText(`Document ${filename} has been successfully uploaded`)
+                setShow(false)
 
 			})
 			.catch(error => {
@@ -143,7 +143,8 @@ export default function AddDoc(props) {
             setData(base64);
             setFilename(filename)
             setResult(false);
-            setOpen(true)
+            setOpen(true);
+            setShow(true)
         };
     
         const convertBase64 = (file) => {
