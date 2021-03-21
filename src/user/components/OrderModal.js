@@ -55,76 +55,88 @@ export default function TransitionsModal(props) {
   };
 
   const submitHandler = (e) => {
-    setLoading(true)
-    setErr(false)
-    setSuccess(false)
-    setShow(false)
-    setResult(false)
-    e.preventDefault();
-    fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDxgA4kIuo0-bxfSaqCOCwmlyjnV05oVPE`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const coordinates = {
-          latitude: data.results[0].geometry.location.lat,
-          longitude: data.results[0].geometry.location.lng,
-          userId: Number(localStorage.getItem("id")),
-        };
-        const headers = {
-          "Content-Type": "application/json",
-          Authorization: localStorage.getItem("token"),
-        };
-        axios
-          .post("/order", coordinates, { headers })
-          .then((response) => {
-            console.log(response);
-            if (response.status === 200) {
-              localStorage.setItem("OrderId", response.data.id);
-              localStorage.setItem("OrderDate", response.data.dateCreated);
-              localStorage.setItem("OrderStatus", response.data.status);
-              localStorage.setItem("userLat", response.data.latitude);
-              localStorage.setItem("userLong", response.data.longitude);
-              setOrderId(response.data.id)
-              setLoading(false);
-              setSuccess(true);
-              setResult(true);
-              setTopic("SUCCESS")
-              setText("Your order has been successfully created");
-            }
-          })
-          .catch((error) => {
-            setLoading(false)
-            setErr(true)
-            setResult(true);
-            setTopic("ERROR")
-            setText(error.response.data.message)
-          });
-      })
+    // setLoading(true)
+    // setErr(false)
+    // setSuccess(false)
+    // setShow(false)
+    // setResult(false)
 
-      .catch((error) => {
-        setLoading(false)
-        setErr(true)
-        setResult(true);
-        setTopic("ERROR")
-        setText(error.message)
-      });
+    // remove these
+    setLoading(false);
+    setSuccess(true);
+    setResult(true);
+    setTopic("SUCCESS")
+    setText("Your order has been successfully created");
+    setOpen(false)
+    setShow(false)
+
+
+    e.preventDefault();
+    // fetch(
+    //   `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyDxgA4kIuo0-bxfSaqCOCwmlyjnV05oVPE`
+    // )
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     const coordinates = {
+    //       latitude: data.results[0].geometry.location.lat,
+    //       longitude: data.results[0].geometry.location.lng,
+    //       userId: Number(localStorage.getItem("id")),
+    //     };
+    //     const headers = {
+    //       "Content-Type": "application/json",
+    //       Authorization: localStorage.getItem("token"),
+    //     };
+    //     axios
+    //       .post("/order", coordinates, { headers })
+    //       .then((response) => {
+    //         console.log(response);
+    //         if (response.status === 200) {
+    //           localStorage.setItem("OrderId", response.data.id);
+    //           localStorage.setItem("OrderDate", response.data.dateCreated);
+    //           localStorage.setItem("OrderStatus", response.data.status);
+    //           localStorage.setItem("userLat", response.data.latitude);
+    //           localStorage.setItem("userLong", response.data.longitude);
+    //           setOrderId(response.data.id)
+    //           setLoading(false);
+    //           setSuccess(true);
+    //           setResult(true);
+    //           setTopic("SUCCESS")
+    //           setText("Your order has been successfully created");
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         setLoading(false)
+    //         setErr(true)
+    //         setResult(true);
+    //         setTopic("ERROR")
+    //         setText(error.response.data.message)
+    //       });
+    //   })
+
+    //   .catch((error) => {
+    //     setLoading(false)
+    //     setErr(true)
+    //     setResult(true);
+    //     setTopic("ERROR")
+    //     setText(error.message)
+    //   });
   };
 
 
   const handleClose = () => {
-    if (props.title === "MESSAGE") {
-      window.location.reload();
-    }
-    if (success === true) {
-        setOrder(true)
-    }
+    // if (props.title === "MESSAGE") {
+    //   window.location.reload();
+    // }
+    // if (success === true) {
+    //     setOrder(true)
+    // }
     setOpen(false);
     setResult(false)
   };
-  if (order === true) {
-    return <Redirect to="/user/order/document" />;
-  }
+
+  // if (success === true) {
+  //   return <Redirect to="/user/order/document"/>;
+  // }
 
   return (
     <div >
@@ -132,7 +144,8 @@ export default function TransitionsModal(props) {
         <div>
           <div className="balance">
             <p>Current balance</p>
-            <div className="wallet-text"><h3>MYR {Number.parseFloat(localStorage.getItem("wallet")).toFixed(2)}</h3><TopupModal iconsize="large"/></div>
+            {/* <div className="wallet-text"><h3>MYR {Number.parseFloat(localStorage.getItem("wallet")).toFixed(2)}</h3><TopupModal iconsize="large"/></div> */}
+            <div className="wallet-text"><h3>MYR 100.00</h3><TopupModal iconsize="large"/></div>
           </div>
         </div>
         <button type="button" className="add-order" onClick={handleOpen}>
@@ -196,7 +209,7 @@ export default function TransitionsModal(props) {
                 <Roller />
             </div>
             )}
-            {result && <ResModal desc={text} status={success} orderid={orderid}/>}
+    {result && <ResModal desc={text} status={success} orderid={1}/>}
     </div>
   );
 }

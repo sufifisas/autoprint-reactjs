@@ -69,6 +69,7 @@ export default function AddDoc(props) {
     const [pageOrientation, setPageOrientation] = useState('AUTO')
     const [coverColour, setCoverColour] = useState('NONE')
     const [coverType, setCoverType] = useState('NONE') 
+    const [file, setFile] = useState('file')
 
     
 
@@ -83,43 +84,45 @@ export default function AddDoc(props) {
     //   };
     
 	const submitHandler = e => {
-        setLoading(true)
-        setSuccess(false)
-        setResult(false)
-        const token = localStorage.getItem("token")
-        const id = localStorage.getItem("OrderId");
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': token
-          }
-        const details = {
-            data : data,
-            filename : filename,
-            pages : pages,
-            colour : colour,
-            copies : copies,
-            coverColour: coverColour,
-            coverType: coverType,
-            pageOrientation : pageOrientation,
-            duplex: duplex,
-            orderId: id
-        }
-		e.preventDefault()
-		axios
-			.post('/document', details, {headers})
-			.then(response => {
-                setLoading(false);
-                setSuccess(true)
-                setResult(true)
-                setText(`Document ${filename} has been successfully uploaded`)
-                setShow(false)
+        // setLoading(true)
+        setSuccess(true)
+        setResult(true)
+        setShow(false)
+        setText(`Document ${filename} has been successfully uploaded`)
+        // const token = localStorage.getItem("token")
+        // const id = localStorage.getItem("OrderId");
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': token
+        //   }
+        // const details = {
+        //     data : data,
+        //     filename : filename,
+        //     pages : pages,
+        //     colour : colour,
+        //     copies : copies,
+        //     coverColour: coverColour,
+        //     coverType: coverType,
+        //     pageOrientation : pageOrientation,
+        //     duplex: duplex,
+        //     orderId: id
+        // }
+		// e.preventDefault()
+		// axios
+		// 	.post('/document', details, {headers})
+		// 	.then(response => {
+        //         setLoading(false);
+        //         setSuccess(true)
+        //         setResult(true)
+        //         setText(`Document ${filename} has been successfully uploaded`)
+        //         setShow(false)
 
-			})
-			.catch(error => {
-                setLoading(false)
-                setResult(true)
-                setText(error.response.data.message)
-            })
+		// 	})
+		// 	.catch(error => {
+        //         setLoading(false)
+        //         setResult(true)
+        //         setText(error.response.data.message)
+        //     })
         }
     
         const handleClose = () => {
@@ -132,6 +135,7 @@ export default function AddDoc(props) {
             setOpen(false);
             setResult(false)
             setShow(false)
+            setFile('')
           };
 
         const uploadImage = async (e) => {
@@ -165,6 +169,9 @@ export default function AddDoc(props) {
                 };
             });
         };
+        const clickButton = () => {
+            setFile('file')
+        }
     
 		return (
         <div>
@@ -173,7 +180,8 @@ export default function AddDoc(props) {
                 className={classes.input}
                 id="contained-button-file"
                 multiple
-                type="file"
+                type={file}
+                onClick={clickButton}
                 onChange={(e) => {uploadImage(e)}}
             />
             <label htmlFor="contained-button-file">

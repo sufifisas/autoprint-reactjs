@@ -8,8 +8,8 @@ class Login extends Component {
     state = {
         username: '',
         password: '', 
-        loggedIn: false,
-        userIn :false 
+        loggedIn: true, //false
+        userIn :true  //false
     }
 
 	changeHandler = e => {
@@ -17,37 +17,37 @@ class Login extends Component {
 	}
 
 	submitHandler = e => {
-        const {username , password } = this.state
+        // const {username , password } = this.state
         
         
-		e.preventDefault()
-		axios
-			.post('/login', {username , password })
-			.then(response => {
-                if(response.status === 200 && response.data.type === "USER"){
-                    localStorage.setItem("id",response.data.id)
-                    localStorage.setItem("token", response.data.token)
-                    localStorage.setItem("type",response.data.type)
-                    this.setState({
-                        loggedIn: true,
-                        userIn: true
-                    })
-                }
+		// e.preventDefault()
+		// axios
+		// 	.post('/login', {username , password })
+		// 	.then(response => {
+        //         if(response.status === 200 && response.data.type === "USER"){
+        //             localStorage.setItem("id",response.data.id)
+        //             localStorage.setItem("token", response.data.token)
+        //             localStorage.setItem("type",response.data.type)
+        //             this.setState({
+        //                 loggedIn: true,
+        //                 userIn: true
+        //             })
+        //         }
                 
-                else if(response.status === 200 && response.data.type === "VENDOR"){
-                    localStorage.setItem("id",response.data.id)
-                    localStorage.setItem("token", response.data.token)
-                    localStorage.setItem("type",response.data.type)
-                    this.setState({
-                        loggedIn: true,
-                        userIn: false
-                    })
-                }
+        //         else if(response.status === 200 && response.data.type === "VENDOR"){
+        //             localStorage.setItem("id",response.data.id)
+        //             localStorage.setItem("token", response.data.token)
+        //             localStorage.setItem("type",response.data.type)
+        //             this.setState({
+        //                 loggedIn: true,
+        //                 userIn: false
+        //             })
+        //         }
                 
-			})
-			.catch(error => {
-				console.log(error)
-            })
+		// 	})
+		// 	.catch(error => {
+		// 		console.log(error)
+        //     })
 	}
 
 	render() {

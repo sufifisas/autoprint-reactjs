@@ -58,36 +58,36 @@ export default function DeleteModal(props) {
       };
     
 	const submitHandler = e => {
-        setLoading(true)
-        setErr(false)
-        setSuccess(false)
-        setResult(false)
+        // setLoading(true)
+        // setErr(false)
+        // setSuccess(false)
+        // setResult(false)
         setShow(false)
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token")
-          }
-        axios
-            .delete(`/document/${props.id}/cancel`,{headers})
-            .then(res => {
-                console.log(res)
-                setText(`Document ${props.desc} has been successfully remove from the order`)
-                setLoading(false)
-                setResult(true)
-                setSuccess(true)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': localStorage.getItem("token")
+        //   }
+        // axios
+        //     .delete(`/document/${props.id}/cancel`,{headers})
+        //     .then(res => {
+        //         console.log(res)
+        //         setText(`Document ${props.desc} has been successfully remove from the order`)
+        //         setLoading(false)
+        //         setResult(true)
+        //         setSuccess(true)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
     
-        if(value===null) {
-            setPay(false)
+        // if(value===null) {
+        //     setPay(false)
             
-          }
-          else {
-            setPay(true)
-            setAmount(value)
-          }
+        //   }
+        //   else {
+        //     setPay(true)
+        //     setAmount(value)
+        //   }
         }
     
         const handleClose = () => {

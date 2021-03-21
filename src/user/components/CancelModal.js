@@ -50,30 +50,37 @@ export default function TransitionsModal(props) {
   };
 
   const submitHandler = (e) => {
-    setLoading(true)
-    setSuccess(false)
+    // setLoading(true)
+    // setSuccess(false)
+    // setShow(false)
+    // setResult(false)
+    // e.preventDefault();
+    // axios
+		// 	.post(`/order/${orderId}/cancel`)
+		// 	.then(response => {
+    //             console.log(response.data);
+    //             if(response.status === 200){
+    //                 setText("Your order has been cancelled")
+    //                 localStorage.setItem("OrderStatus", "CANCELLED");
+    //                 setText("Your order has been successfully cancel");
+    //                 setSuccess(true)
+    //                 setLoading(false)
+    //                 setResult(true)
+    //             } 
+    //             })
+		// 	.catch(error => {
+    //             console.log(error)
+    //             setLoading(false)
+    //             setResult(true)
+    //             setText(error.response.data.message)
+    //         })
+
+
+    setText("Your order has been successfully cancel");
+    setSuccess(true)
+    setLoading(false)
+    setResult(true)
     setShow(false)
-    setResult(false)
-    e.preventDefault();
-    axios
-			.post(`/order/${orderId}/cancel`)
-			.then(response => {
-                console.log(response.data);
-                if(response.status === 200){
-                    setText("Your order has been cancelled")
-                    localStorage.setItem("OrderStatus", "CANCELLED");
-                    setText("Your order has been successfully cancel");
-                    setSuccess(true)
-                    setLoading(false)
-                    setResult(true)
-                } 
-                })
-			.catch(error => {
-                console.log(error)
-                setLoading(false)
-                setResult(true)
-                setText(error.response.data.message)
-            })
   };
 
 

@@ -54,49 +54,54 @@ export default function DeleteModal(props) {
       };
     
 	const submitHandler = e => {
-        setLoading(true)
-        setSuccess(false)
-        setResult(false)
+        // setLoading(true)
+        // setSuccess(false)
+        // setResult(false)
+        // setShow(false)
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': localStorage.getItem("token")
+        //   }
+        // if(wallet < inv){
+        //   setText("You have insufficient credit. Please topup your wallet before proceed to confirm")
+        //   setSuccess(false)
+        //   setResult(true)
+        //   setLoading(false)
+        // }
+        // else {
+        //   axios
+        //   .post(`/order/${orderId}/confirm?accept=true`,{}, {headers})
+        //   .then(response => {
+        //       console.log(response.data,"confirm");
+        //       if(response.status === 200){
+        //         localStorage.setItem("OrderStatus", response.data.status);
+        //         axios
+        //         .post(`/order/${orderId}/pay?amount=${inv}`, {}, {headers})
+        //         .then(response => {
+        //             console.log(response.data,"payment");
+        //             if(response.status === 200){
+        //               setLoading(false)
+        //               setSuccess(true)
+        //               setResult(true)
+        //               setText("Payment has been completed. We will notice you when the order has been completed by the vendor")
+        //             } 
+        //             })
+        //         .catch(error => {
+        //             console.log(error)
+        //             setResult(true)
+        //         })
+        //       } 
+        //       })
+        //   .catch(error => {
+        //       console.log(error)
+        //       setResult(true)
+        //   })
+        // }
+        
         setShow(false)
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token")
-          }
-        if(wallet < inv){
-          setText("You have insufficient credit. Please topup your wallet before proceed to confirm")
-          setSuccess(false)
-          setResult(true)
-          setLoading(false)
-        }
-        else {
-          axios
-          .post(`/order/${orderId}/confirm?accept=true`,{}, {headers})
-          .then(response => {
-              console.log(response.data,"confirm");
-              if(response.status === 200){
-                localStorage.setItem("OrderStatus", response.data.status);
-                axios
-                .post(`/order/${orderId}/pay?amount=${inv}`, {}, {headers})
-                .then(response => {
-                    console.log(response.data,"payment");
-                    if(response.status === 200){
-                      setLoading(false)
-                      setSuccess(true)
-                      setResult(true)
-                      setText("Payment has been completed. We will notice you when the order has been completed by the vendor")
-                    } 
-                    })
-                .catch(error => {
-                    console.log(error)
-                    setResult(true)
-                })
-              } 
-              })
-          .catch(error => {
-              console.log(error)
-              setResult(true)
-          })
-        }
+        setSuccess(true)
+        setResult(true)
+        setText("Payment has been completed. We will notice you when the order has been completed by the vendor")
         
         }
     

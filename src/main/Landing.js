@@ -10,15 +10,15 @@ class Landing extends Component {
         super(props)
         const token = localStorage.getItem("token")
         const type = localStorage.getItem("type")
-        let loggedIn = true
-        let userIn = true
+        let loggedIn = true //false
+        let userIn = true  //flase
 
-        if(token === null){
-        loggedIn = false
-        }
-        if(type === "VENDOR"){
-          userIn = false
-        }
+    //     if(token === null){
+    //     loggedIn = false
+    //     }
+    //     if(type === "VENDOR"){
+    //       userIn = false
+    //     }
 
 		this.state = {
         loggedIn,

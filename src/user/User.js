@@ -23,25 +23,25 @@ class User extends Component {
     userIn: true
   };
 
-  componentDidMount() {
-    const token = localStorage.getItem("token");
-    if (token === null || localStorage.getItem("type")==="VENDOR") {
-      this.setState({ loggedIn: false });
-    }
-    else if(localStorage.getItem("type") === "VENDOR"){
-      this.setState({ userIn: false });
-    }
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': 'superadmin_576a0a1284a853b56f50e876273cdadbfd8ec13408223f1492617a75399921c4'
-      }
-    const id = localStorage.getItem("id");
-    axios.get('/user/'+ id ,{headers})
-    .then(res => {
-        localStorage.setItem("wallet",res.data.amount)
-        localStorage.setItem("loader",true)
-    }) 
-  }
+  // componentDidMount() {
+  //   const token = localStorage.getItem("token");
+  //   if (token === null || localStorage.getItem("type")==="VENDOR") {
+  //     this.setState({ loggedIn: false });
+  //   }
+  //   else if(localStorage.getItem("type") === "VENDOR"){
+  //     this.setState({ userIn: false });
+  //   }
+  //   const headers = {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'superadmin_576a0a1284a853b56f50e876273cdadbfd8ec13408223f1492617a75399921c4'
+  //     }
+  //   const id = localStorage.getItem("id");
+  //   axios.get('/user/'+ id ,{headers})
+  //   .then(res => {
+  //       localStorage.setItem("wallet",res.data.amount)
+  //       localStorage.setItem("loader",true)
+  //   }) 
+  // }
 
   render() {
     if (!this.state.loggedIn) {

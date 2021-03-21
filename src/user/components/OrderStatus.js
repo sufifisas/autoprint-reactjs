@@ -8,25 +8,25 @@ import { Roller } from 'react-awesome-spinners'
 
 function OrderStatus(props) {
     const [list, setList] = useState([])
-    const [loading, setLoading] = useState(true)
-    useEffect(() => {
+    const [loading, setLoading] = useState(false) //true
+    // useEffect(() => {
       
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem("token")
-      }
-      axios
-			.get(`/order/user/${localStorage.getItem("id")}?status=${props.status}`,{headers})
-			.then(response => {
-                setList(response.data.content)
-                setLoading(false)
-                console.log(response.data.content)
-                })
-			.catch(error => {
-        alert(error.response.data.message)
-        console.log(error.response.data)
-            })
-    },[]);
+    //   const headers = {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': localStorage.getItem("token")
+    //   }
+    //   axios
+	// 		.get(`/order/user/${localStorage.getItem("id")}?status=${props.status}`,{headers})
+	// 		.then(response => {
+    //             setList(response.data.content)
+    //             setLoading(false)
+    //             console.log(response.data.content)
+    //             })
+	// 		.catch(error => {
+    //     alert(error.response.data.message)
+    //     console.log(error.response.data)
+    //         })
+    // },[]);
 
     const redirect = (id, latitude , longitude) => {
         localStorage.setItem("OrderId", id)
@@ -37,7 +37,7 @@ function OrderStatus(props) {
     return (
         <div>
               <div className="row order-list">
-                {list.reverse().map((item, i) => {
+                {/* {list.reverse().map((item, i) => {
                     return (
                     <div className="col-3" key= {i}>
                         <Link onClick={() => redirect(item.id,item.latitude , item.longitude)} to={`/user/order/${item.id}`}>
@@ -45,21 +45,65 @@ function OrderStatus(props) {
                             <li className="refer">{item.referenceId}</li>
                             <li className="date">{dateFormat(item.dateCreated, "mmmm dS, yyyy")}</li>
                             <li className="vendorname"><img src={shop} alt=""/>{item.vendor.vendorname?item.vendor.vendorname:"N/A"}</li>
-                            <li className="status"
-                            
-                            
-                            >{item.status}</li>
+                            <li className="status">{item.status}</li>
                             <li className="cash"><img src={cash} alt=""/>{item.invoices[0]?`MYR ${item.invoices[0].amount}` : "N/A"}</li>
                         </ul>
                         </Link>
                     </div>
                     )
-                })}
-                {loading && <div className="loading"><Roller /></div>}
+                })} */}
+
+                    <div className="col-3">
+                        <Link to={`/user/order/1`}>
+                        <ul  className="order-card">
+                            <li className="refer">ABCD1234</li>
+                            <li className="date">January 17th, 2021</li>
+                            <li className="vendorname"><img src={shop} alt=""/>Popular Printing</li>
+                            <li className="status">PENDING</li>
+                            <li className="cash"><img src={cash} alt=""/>MYR 2.00</li>
+                        </ul>
+                        </Link>
+                    </div>
+                    <div className="col-3">
+                        <Link to={`/user/order/2`}>
+                        <ul  className="order-card">
+                            <li className="refer">ABCD2234</li>
+                            <li className="date">January 17th, 2021</li>
+                            <li className="vendorname"><img src={shop} alt=""/>Popular Printing</li>
+                            <li className="status">PENDING</li>
+                            <li className="cash"><img src={cash} alt=""/>MYR 1.00</li>
+                        </ul>
+                        </Link>
+                    </div>
+                    <div className="col-3">
+                        <Link to={`/user/order/3`}>
+                        <ul  className="order-card">
+                            <li className="refer">ABCD3234</li>
+                            <li className="date">January 17th, 2021</li>
+                            <li className="vendorname"><img src={shop} alt=""/>Popular Printing</li>
+                            <li className="status">PENDING</li>
+                            <li className="cash"><img src={cash} alt=""/>MYR 2.50</li>
+                        </ul>
+                        </Link>
+                    </div>
+                    <div className="col-3">
+                        <Link to={`/user/order/4`}>
+                        <ul  className="order-card">
+                            <li className="refer">ABCD4234</li>
+                            <li className="date">January 17th, 2021</li>
+                            <li className="vendorname"><img src={shop} alt=""/>Popular Printing</li>
+                            <li className="status">PENDING</li>
+                            <li className="cash"><img src={cash} alt=""/>MYR 1.00</li>
+                        </ul>
+                        </Link>
+                    </div>
+
+
+                {/* {loading && <div className="loading"><Roller /></div>}
                 {!loading && list.length%4===0 && list.length===0? <div className="col-12 rare"><div className="empty full"></div></div>:<div></div>}
                 {!loading && list.length%4 < 2 && list.length%4 > 0?<div className="col-3 rare"><div className="empty"></div></div>:<div></div>}
                 {!loading && list.length%4 < 3 && list.length%4 > 0?<div className="col-3 rare"><div className="empty"></div></div>:<div></div>}
-                {!loading && list.length%4 < 4 && list.length%4 > 0?<div className="col-3 rare"><div className="empty"></div></div>:<div></div>}    
+                {!loading && list.length%4 < 4 && list.length%4 > 0?<div className="col-3 rare"><div className="empty"></div></div>:<div></div>}     */}
               </div>
         </div>
     );
