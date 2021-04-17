@@ -77,40 +77,40 @@ export default function Editprofile(props) {
     Geocode.setApiKey("AIzaSyDxgA4kIuo0-bxfSaqCOCwmlyjnV05oVPE");
 
 
-    useEffect(() => {
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem("token")
-        }
-        setLoading(true)
-        axios
-              .get(`/vendor/${localStorage.getItem("vendorId")}`,{headers})
-              .then(response => {
-                console.log(response.data.user,"test")
-                  setFullname(response.data.user.fullname)
-                  setEmail(response.data.user.email)
-                  setUsername(response.data.user.username)
-                  setPhoneNumber(response.data.user.phoneNumber)
-                  setImageBase64(response.data.user.imageBase64)
-                  setImgUrl(response.data.user.imgUrl)
-                  setVendorname(response.data.vendorname)
-                  setLatitude(response.data.latitude)
-                  setLongitude(response.data.longitude)
-                  setLoading(false)
-                  Geocode.fromLatLng(response.data.latitude,response.data.longitude).then(
-                    response => {
-                      const addresses = response.results[0].formatted_address;
-                      setAddress(addresses)
-                    },
-                    error => {
-                      console.error(error);
-                    }
-                  );
-                  })
-              .catch(error => {
-                  console.log(error)
-              })
-      },[]);
+    // useEffect(() => {
+    //     const headers = {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': localStorage.getItem("token")
+    //     }
+    //     setLoading(true)
+    //     axios
+    //           .get(`/vendor/${localStorage.getItem("vendorId")}`,{headers})
+    //           .then(response => {
+    //             console.log(response.data.user,"test")
+    //               setFullname(response.data.user.fullname)
+    //               setEmail(response.data.user.email)
+    //               setUsername(response.data.user.username)
+    //               setPhoneNumber(response.data.user.phoneNumber)
+    //               setImageBase64(response.data.user.imageBase64)
+    //               setImgUrl(response.data.user.imgUrl)
+    //               setVendorname(response.data.vendorname)
+    //               setLatitude(response.data.latitude)
+    //               setLongitude(response.data.longitude)
+    //               setLoading(false)
+    //               Geocode.fromLatLng(response.data.latitude,response.data.longitude).then(
+    //                 response => {
+    //                   const addresses = response.results[0].formatted_address;
+    //                   setAddress(addresses)
+    //                 },
+    //                 error => {
+    //                   console.error(error);
+    //                 }
+    //               );
+    //               })
+    //           .catch(error => {
+    //               console.log(error)
+    //           })
+    //   },[]);
 
     const handleOpen = () => {
         setOpen(true);
@@ -148,59 +148,59 @@ export default function Editprofile(props) {
     
 
 	const submitHandler = e => {
-        setLoading(true)
-        setErr(false)
-        setSuccess(false)
+        // setLoading(true)
+        // setErr(false)
+        // setSuccess(false)
         setShow(false)
-        setResult(false)
+        // setResult(false)
 
-        Geocode.fromAddress(address).then(
-          response => {
-            const { lat, lng } = response.results[0].geometry.location;
-            setLatitude(lat)
-            setLongitude(lng)
-            console.log(lat, lng)
-            const headers = {
-              'Content-Type': 'application/json',
-              'Authorization': token
-            }
-          const details = {
-              username,
-              email,
-              fullname,
-              imageBase64,
-              phoneNumber,
-              vendorname,
-              latitude:lat,
-              longitude:lng
-          }
-          const id = localStorage.getItem("vendorId");
-          e.preventDefault()
-          axios
-            .put('/vendor/'+ id , details , {headers})
-            .then(response => {
-                      if (response.status === 200) {
+        // Geocode.fromAddress(address).then(
+        //   response => {
+        //     const { lat, lng } = response.results[0].geometry.location;
+        //     setLatitude(lat)
+        //     setLongitude(lng)
+        //     console.log(lat, lng)
+        //     const headers = {
+        //       'Content-Type': 'application/json',
+        //       'Authorization': token
+        //     }
+        //   const details = {
+        //       username,
+        //       email,
+        //       fullname,
+        //       imageBase64,
+        //       phoneNumber,
+        //       vendorname,
+        //       latitude:lat,
+        //       longitude:lng
+        //   }
+        //   const id = localStorage.getItem("vendorId");
+        //   e.preventDefault()
+        //   axios
+        //     .put('/vendor/'+ id , details , {headers})
+        //     .then(response => {
+        //               if (response.status === 200) {
                           setLoading(false);
                           setSuccess(true);
                           setResult(true);
                           setTopic("SUCCESS")
                           setText("Your profile has been successfully updated");         
-                      }
-            })
-            .catch(error => {
-                      setLoading(false)
-                      setErr(true)
-                      setResult(true);
-                      setTopic("ERROR")
-                      setText(error.response.data.message)
-                      })
-          },
-          error => {
-            console.error(error);
-          }
-        );
+        //               }
+        //     })
+        //     .catch(error => {
+        //               setLoading(false)
+        //               setErr(true)
+        //               setResult(true);
+        //               setTopic("ERROR")
+        //               setText(error.response.data.message)
+        //               })
+          // },
+          // error => {
+          //   console.error(error);
+          // }
+        // );
 
-        const token = localStorage.getItem("token")
+        // const token = localStorage.getItem("token")
        
         }
     

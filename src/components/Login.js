@@ -51,10 +51,17 @@ class Login extends Component {
 	}
 
 	render() {
-        if(this.state.loggedIn && this.state.userIn){
+        // if(this.state.loggedIn && this.state.userIn){
+        //     return <Redirect to="/user" />
+        // }
+        // else if(this.state.loggedIn && !this.state.userIn){
+        //     return <Redirect to="/vendor" />
+        // }
+
+        if(localStorage.getItem("type")==="user"){
             return <Redirect to="/user" />
         }
-        else if(this.state.loggedIn && !this.state.userIn){
+        else if(localStorage.getItem("type")==="vendor"){
             return <Redirect to="/vendor" />
         }
         

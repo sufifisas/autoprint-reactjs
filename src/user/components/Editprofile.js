@@ -53,28 +53,28 @@ export default function Editprofile(props) {
     const [img ,setImg] = useState(false)
     const [imageUrl, setImgUrl] = useState('')
 
-    useEffect(() => {
-        const headers = {
-          'Content-Type': 'application/json',
-          'Authorization': localStorage.getItem("token")
-        }
-        setLoading(true)
-        axios
-              .get(`/user/${localStorage.getItem("id")}`,{headers})
-              .then(response => {
-                console.log(response.data.fullname,"test")
-                  setFullname(response.data.fullname)
-                  setEmail(response.data.email)
-                  setUsername(response.data.username)
-                  setPhoneNumber(response.data.phoneNumber)
-                  setImageBase64(response.data.imageBase64)
-                  setImgUrl(response.data.imgUrl)
-                  setLoading(false)
-                  })
-              .catch(error => {
-                  console.log(error)
-              })
-      },[]);
+    // useEffect(() => {
+    //     const headers = {
+    //       'Content-Type': 'application/json',
+    //       'Authorization': localStorage.getItem("token")
+    //     }
+    //     setLoading(true)
+    //     axios
+    //           .get(`/user/${localStorage.getItem("id")}`,{headers})
+    //           .then(response => {
+    //             console.log(response.data.fullname,"test")
+    //               setFullname(response.data.fullname)
+    //               setEmail(response.data.email)
+    //               setUsername(response.data.username)
+    //               setPhoneNumber(response.data.phoneNumber)
+    //               setImageBase64(response.data.imageBase64)
+    //               setImgUrl(response.data.imgUrl)
+    //               setLoading(false)
+    //               })
+    //           .catch(error => {
+    //               console.log(error)
+    //           })
+    //   },[]);
 
     const handleOpen = () => {
         setOpen(true);
@@ -112,43 +112,50 @@ export default function Editprofile(props) {
     
 
 	const submitHandler = e => {
-        setLoading(true)
-        setErr(false)
-        setSuccess(false)
-        setShow(false)
-        setResult(false)
-        const token = localStorage.getItem("token")
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': token
-          }
-        const details = {
-            username,
-            email,
-            fullname,
-            imageBase64,
-            phoneNumber,
-        }
-        const id = localStorage.getItem("id");
-		e.preventDefault()
-		axios
-			.put('/user/'+ id , details , {headers})
-			.then(response => {
-                if (response.status === 200) {
-                    setLoading(false);
-                    setSuccess(true);
-                    setResult(true);
-                    setTopic("SUCCESS")
-                    setText("Your profile has been successfully updated");         
-                }
-			})
-			.catch(error => {
-                setLoading(false)
-                setErr(true)
-                setResult(true);
-                setTopic("ERROR")
-                setText(error.response.data.message)
-                })
+        // setLoading(true)
+        // setErr(false)
+        // setSuccess(false)
+        // setShow(false)
+        // setResult(false)
+        // const token = localStorage.getItem("token")
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': token
+        //   }
+        // const details = {
+        //     username,
+        //     email,
+        //     fullname,
+        //     imageBase64,
+        //     phoneNumber,
+        // }
+        // const id = localStorage.getItem("id");
+        // e.preventDefault()
+        // axios
+        //   .put('/user/'+ id , details , {headers})
+        //   .then(response => {
+        //             if (response.status === 200) {
+        //                 setLoading(false);
+        //                 setSuccess(true);
+        //                 setResult(true);
+        //                 setTopic("SUCCESS")
+        //                 setText("Your profile has been successfully updated");         
+        //             }
+        //   })
+        //   .catch(error => {
+        //             setLoading(false)
+        //             setErr(true)
+        //             setResult(true);
+        //             setTopic("ERROR")
+        //             setText(error.response.data.message)
+        //             })
+
+                      setLoading(false);
+                      setSuccess(true);
+                      setResult(true);
+                      setTopic("SUCCESS")
+                      setText("Your profile has been successfully updated");
+                      setShow(false)   
         }
     
         const handleClose = () => {
@@ -210,7 +217,7 @@ export default function Editprofile(props) {
                     <TextField
                     label="Username"
                     id="outlined-size-normal"
-                    defaultValue= {username}
+                    defaultValue= {username ? username : 'sufi98'}
                     onChange={(e) => setUsername(e.target.value)}
                     fullWidth
                     variant="outlined"
@@ -218,7 +225,7 @@ export default function Editprofile(props) {
                     <TextField
                     label="Full name"
                     id="outlined-size-normal"
-                    defaultValue= {fullname}
+                    defaultValue= {fullname ? username : 'Sufi Saadon'}
                     onChange={(e) => setFullname(e.target.value)}
                     fullWidth
                     variant="outlined"
@@ -226,7 +233,7 @@ export default function Editprofile(props) {
                     <TextField
                     label="Email address"
                     id="outlined-size-normal"
-                    defaultValue= {email}
+                    defaultValue= {email ? username : 'sufi@yopmail.com'}
                     onChange={(e) => setEmail(e.target.value)}
                     fullWidth
                     variant="outlined"
@@ -234,7 +241,7 @@ export default function Editprofile(props) {
                     <TextField
                     label="Phone number"
                     id="outlined-size-normal"
-                    defaultValue= {phoneNumber}
+                    defaultValue= {phoneNumber ? username : '012345678'}
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     fullWidth
                     variant="outlined"

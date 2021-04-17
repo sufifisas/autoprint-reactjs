@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function UpdatePassword(props) {
+export default function AddProductModal(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [text, setText] = useState("");
@@ -61,17 +61,17 @@ export default function UpdatePassword(props) {
     const [price, setPrice] = useState(props.price);
     const [product, setProduct] = useState([])
     
-    useEffect(() => {
-        axios
-        .get(`/product/all`)
-        .then(response => {
-            console.log(response,"product");
-            setProduct(response.data.content)
-        })
-        .catch(error => {
-            console.log(error);
-                })
-    },[])
+    // useEffect(() => {
+    //     axios
+    //     .get(`/product/all`)
+    //     .then(response => {
+    //         console.log(response,"product");
+    //         setProduct(response.data.content)
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //             })
+    // },[])
 
     const handleOpen = () => {
         setOpen(true);
@@ -85,16 +85,16 @@ export default function UpdatePassword(props) {
     
 
     
-        const handleClose = () => {
-            if (props.title === "MESSAGE") {
-              window.location.reload();
-            }
-            if (success === true) {
-                window.location.reload();
-              }
-            setOpen(false);
-            setResult(false)
-          };
+    const handleClose = () => {
+        if (props.title === "MESSAGE") {
+          window.location.reload();
+        }
+        if (success === true) {
+            window.location.reload();
+          }
+        setOpen(false);
+        setResult(false)
+      };
     
 		return (
         <div>
@@ -141,13 +141,21 @@ export default function UpdatePassword(props) {
                     }}
                     >
                  
-                    {product.map((item, i) => {
+                    {/* {product.map((item, i) => {
                         return (
                         <div key={i} className="product-all">
                             <Add productId={item.id} title={item.productName}/>
                         </div>
                         );
-                    })}
+                    })} */}
+
+
+                    <div className="product-all">
+                        <Add productId={1} title="AUTO COLOUR"/>
+                        <Add productId={2} title="MONOCHROME COLOUR"/>
+                    </div>
+
+
                     </form>
                 </div>
                 </Fade>

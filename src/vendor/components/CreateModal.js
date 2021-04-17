@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function UpdatePassword(props) {
+export default function CreateModal(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [text, setText] = useState("");
@@ -81,37 +81,37 @@ export default function UpdatePassword(props) {
       };
     
 	const submitHandler = e => {
-        setLoading(true)
-        setErr(false)
-        setSuccess(false)
+    //     setLoading(true)
+    //     setErr(false)
+    //     setSuccess(false)
         setShow(false)
-        setResult(false)
-        const details = {
-            price: price,
-            productId: props.productId,
-            vendorId: localStorage.getItem("vendorId")
-        }
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token")
-          }
-		e.preventDefault()
-        axios
-            .post(`/product/vendor`, details , {headers})
-            .then(response => {
-                console.log(response,"updated");
+    //     setResult(false)
+    //     const details = {
+    //         price: price,
+    //         productId: props.productId,
+    //         vendorId: localStorage.getItem("vendorId")
+    //     }
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': localStorage.getItem("token")
+    //       }
+		// e.preventDefault()
+    //     axios
+    //         .post(`/product/vendor`, details , {headers})
+    //         .then(response => {
+    //             console.log(response,"updated");
                 setText(`Product ${props.title} has been added with the price MYR ${price}`)
                 setLoading(false)
                 setSuccess(true)
                 setResult(true)
-            })
-            .catch(error => {
-                setText("Please enter a valid amount")
-                console.log(error.response.data)
-                setLoading(false)
-                setResult(true)
+    //         })
+    //         .catch(error => {
+    //             setText("Please enter a valid amount")
+    //             console.log(error.response.data)
+    //             setLoading(false)
+    //             setResult(true)
                 
-            })
+    //         })
         }
     
         const handleClose = () => {

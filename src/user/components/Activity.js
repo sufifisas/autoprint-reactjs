@@ -54,6 +54,18 @@ function Activity() {
                       <li className="col-5">Hello there. Welcome to AUTOPRINT! Feel free to contact us if any problem occurs :)</li>
                       <li className="col-2">NOTIFICATION</li>
                     </ul>
+                    <ul className="orderlist row">
+                      <li className="col-2">R-ABCD1234</li>
+                      <li className="col-3">Welcome to AUTOPRINT!</li>
+                      <li className="col-5">Hello there. Welcome to AUTOPRINT! Feel free to contact us if any problem occurs :)</li>
+                      <li className="col-2">NOTIFICATION</li>
+                    </ul>
+                    <ul className="orderlist row">
+                      <li className="col-2">R-ABCD1234</li>
+                      <li className="col-3">Welcome to AUTOPRINT!</li>
+                      <li className="col-5">Hello there. Welcome to AUTOPRINT! Feel free to contact us if any problem occurs :)</li>
+                      <li className="col-2">NOTIFICATION</li>
+                    </ul>
                     
 
                 </div>

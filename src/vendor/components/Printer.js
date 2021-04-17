@@ -5,25 +5,25 @@ import Loader from "./Loader";
 import Add from './AddPrinterModal'
 
 function Product() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem("token")
-      }
-    axios
-      .get(`/printer/vendor/${localStorage.getItem("vendorId")}`,{headers})
-      .then((response) => {
-        console.log(response, "all");
-        setList(response.data.content);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const headers = {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': localStorage.getItem("token")
+  //     }
+  //   axios
+  //     .get(`/printer/vendor/${localStorage.getItem("vendorId")}`,{headers})
+  //     .then((response) => {
+  //       console.log(response, "all");
+  //       setList(response.data.content);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
 
   return (
@@ -38,7 +38,7 @@ function Product() {
             <div className="product-wrap">
                 
                 <div className="product-content">
-                  {list.length > 0 ? (
+                  {!list.length > 0 ? (
                     <div>
                         <div className='add'><Add title="Add Printer"/></div>
                       <ul className="product-header">
@@ -47,7 +47,7 @@ function Product() {
                         <li className="col-2">Status</li>
                         <li className="col-1"></li>
                       </ul>
-                      {list.map((item, i) => {
+                      {/* {list.map((item, i) => {
                         return (
                           <ul key={i} className="product-list">
                             <li className="col-1">{i+1}</li>
@@ -66,7 +66,58 @@ function Product() {
                             </li>
                           </ul>
                         );
-                      })}
+                      })} */}
+
+
+                          <ul className="product-list">
+                            <li className="col-1">1</li>
+                            <li className="col-7">
+                              TOSHIBA
+                            </li>
+                            <li className="col-2">
+                              ACTIVE
+                            </li>
+                            <li className="col-1">
+                              <Update
+                                active="ACTIVE"
+                                title="TOSHIBA"
+                                id={1}
+                              />
+                            </li>
+                          </ul>
+                          <ul className="product-list">
+                            <li className="col-1">2</li>
+                            <li className="col-7">
+                              SAMSUNG
+                            </li>
+                            <li className="col-2">
+                              INACTIVE
+                            </li>
+                            <li className="col-1">
+                              <Update
+                                active="ACTIVE"
+                                title="TOSHIBA"
+                                id={2}
+                              />
+                            </li>
+                          </ul>
+                          <ul className="product-list">
+                            <li className="col-1">3</li>
+                            <li className="col-7">
+                              DELL
+                            </li>
+                            <li className="col-2">
+                              ACTIVE
+                            </li>
+                            <li className="col-1">
+                              <Update
+                                active="ACTIVE"
+                                title="TOSHIBA"
+                                id={3}
+                              />
+                            </li>
+                          </ul>
+                      
                     </div>
                   ) : (
                     <div className="content-center">

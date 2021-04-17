@@ -48,6 +48,7 @@ class User extends Component {
       return <Redirect to="/" />;
     }
 
+
     return (
       <div>
         <Router>

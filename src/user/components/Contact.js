@@ -17,34 +17,41 @@ function Contact() {
     const [result, setResult] = useState(false);
 
 	const submitHandler = e => {
-        const details = {
-            content : content,
-            title : title
-        }
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token")
-          }
-        setLoading(true)
-        setSuccess(false)
-        setResult(false)
+        // const details = {
+        //     content : content,
+        //     title : title
+        // }
+        // const headers = {
+        //     'Content-Type': 'application/json',
+        //     'Authorization': localStorage.getItem("token")
+        //   }
+        // setLoading(true)
+        // setSuccess(false)
+        // setResult(false)
         e.preventDefault()
-		axios
-			.post('/activity', details , {headers})
-			.then(response => {
-                console.log(response);
-                if(response.status === 200){
-                    setLoading(false)
-                    setSuccess(true)
-                    setResult(true)
-                    setText("Your report has been successfully sent.")
-                }        
-			})
-			.catch(error => {
-                setLoading(false)
-                setResult(true)
-                setText("Please fill in the form provided")
-			})
+        // axios
+        //   .post('/activity', details , {headers})
+        //   .then(response => {
+        //             console.log(response);
+        //             if(response.status === 200){
+        //                 setLoading(false)
+        //                 setSuccess(true)
+        //                 setResult(true)
+        //                 setText("Your report has been successfully sent.")
+        //             }        
+        //   })
+        //   .catch(error => {
+        //             setLoading(false)
+        //             setResult(true)
+        //             setText("Please fill in the form provided")
+        //   })
+
+        setResult(false)
+        setLoading(false)
+        setSuccess(true)
+        setResult(true)
+        setText("Your report has been successfully sent.")
+        
         }
         return (
           <div>

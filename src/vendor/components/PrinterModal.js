@@ -79,33 +79,39 @@ export default function UpdatePassword(props) {
       };
     
 	const submitHandler = e => {
-        setLoading(true)
-        setErr(false)
-        setSuccess(false)
-        setShow(false)
-        setResult(false)
-        const token = localStorage.getItem("token")
-        const details = {
-            name : props.title,
-            status: `${active?"ACTIVE":"INACTIVE"}`,
-        }
-		e.preventDefault()
-        axios
-            .put(`/printer/${props.id}`, details)
-            .then(response => {
-                console.log(response,"updated");
-                setText(`Printer ${props.title} has been updated`)
-                setLoading(false)
-                setSuccess(true)
-                setResult(true)
-            })
-            .catch(error => {
-                setText("Update failed")
-                console.log(error.response.data)
-                setLoading(false)
-                setResult(true)
+    //     setLoading(true)
+    //     setErr(false)
+    //     setSuccess(false)
+    //     setShow(false)
+    //     setResult(false)
+    //     const token = localStorage.getItem("token")
+    //     const details = {
+    //         name : props.title,
+    //         status: `${active?"ACTIVE":"INACTIVE"}`,
+    //     }
+		// e.preventDefault()
+    //     axios
+    //         .put(`/printer/${props.id}`, details)
+    //         .then(response => {
+    //             console.log(response,"updated");
+    //             setText(`Printer ${props.title} has been updated`)
+    //             setLoading(false)
+    //             setSuccess(true)
+    //             setResult(true)
+    //         })
+    //         .catch(error => {
+    //             setText("Update failed")
+    //             console.log(error.response.data)
+    //             setLoading(false)
+    //             setResult(true)
                 
-            })
+    //         })
+        setText(`Printer ${props.title} has been updated`)
+        setLoading(false)
+        setSuccess(true)
+        setResult(true)
+        setShow(false)
+
         }
     
         const handleClose = () => {

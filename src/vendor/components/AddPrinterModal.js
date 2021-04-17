@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function UpdatePassword(props) {
+export default function AddPrinterModal(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [text, setText] = useState("");
@@ -67,35 +67,35 @@ export default function UpdatePassword(props) {
      
     
     const submitHandler = (e) => {
-        setLoading(true)
-        setSuccess(false)
+        // setLoading(true)
+        // setSuccess(false)
         setShow(false)
-        setResult(false)
-        setText('')
-        e.preventDefault();
+        // setResult(false)
+        // setText('')
+        // e.preventDefault();
         
-        const details = {
-            name: printer,
-            vendorId: localStorage.getItem("vendorId")
-        }
-        axios
-        .post(`/printer`, details , {headers})
-        .then(response => {
-                  console.log(response,"post");
-                  if(response.status === 200){
+        // const details = {
+        //     name: printer,
+        //     vendorId: localStorage.getItem("vendorId")
+        // }
+        // axios
+        // .post(`/printer`, details , {headers})
+        // .then(response => {
+        //           console.log(response,"post");
+        //           if(response.status === 200){
                     setText(`Printer ${printer} has been successfully added`);
                     setSuccess(true)
                     setLoading(false)
                     setResult(true)
-                  }  
+        //           }  
                   
-        })
-        .catch(error => {
-          console.log(error)
-          setLoading(false)
-          setResult(true)
-          setText(error.response.data.message)
-              })
+        // })
+        // .catch(error => {
+        //   console.log(error)
+        //   setLoading(false)
+        //   setResult(true)
+        //   setText(error.response.data.message)
+        //       })
       };
 
     const handleOpen = () => {

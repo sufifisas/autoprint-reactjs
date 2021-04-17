@@ -14,44 +14,44 @@ function Order() {
     const [reject, setReject] = useState()
     const [complete, setComplete] = useState()
     const [all,setAll] = useState()
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
 
 
-    useEffect(() => {
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem("token")
-      }
-      const list = ['CONFIRM', 'REJECTED', 'COMPLETED']
-      list.forEach((product) => {
-        axios
-        .get(`/order/vendor/${localStorage.getItem("vendorId")}?status=${product}`,{headers})
-        .then(response => {
-                  if(product==="PENDING"){
-                    setPending(response.data.content.length,product) 
-                  }
-                  else if(product===""){
-                    setAll(response.data.content.length,product) 
-                  }
-                  else if(product==="CONFIRM"){
-                    setConfirm(response.data.content.length,product) 
-                  }
-                  else if(product==="CANCELLED"){
-                    setCancel(response.data.content.length,product) 
-                  }
-                  else if(product==="REJECTED"){
-                    setReject(response.data.content.length,product) 
-                  }
-                  else {
-                    setComplete(response.data.content.length,product) 
-                  }
-                  setLoading(false)
-                  })
-        .catch(error => {
-          alert(error)
-              })
-      })
-    },[])
+    // useEffect(() => {
+    //   const headers = {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': localStorage.getItem("token")
+    //   }
+    //   const list = ['CONFIRM', 'REJECTED', 'COMPLETED']
+    //   list.forEach((product) => {
+    //     axios
+    //     .get(`/order/vendor/${localStorage.getItem("vendorId")}?status=${product}`,{headers})
+    //     .then(response => {
+    //               if(product==="PENDING"){
+    //                 setPending(response.data.content.length,product) 
+    //               }
+    //               else if(product===""){
+    //                 setAll(response.data.content.length,product) 
+    //               }
+    //               else if(product==="CONFIRM"){
+    //                 setConfirm(response.data.content.length,product) 
+    //               }
+    //               else if(product==="CANCELLED"){
+    //                 setCancel(response.data.content.length,product) 
+    //               }
+    //               else if(product==="REJECTED"){
+    //                 setReject(response.data.content.length,product) 
+    //               }
+    //               else {
+    //                 setComplete(response.data.content.length,product) 
+    //               }
+    //               setLoading(false)
+    //               })
+    //     .catch(error => {
+    //       alert(error)
+    //           })
+    //   })
+    // },[])
 
   
     return (
@@ -65,10 +65,16 @@ function Order() {
             <div>
           <div className="order-status">
             <Tabs>
-              <TabList>
+              {/* <TabList>
                 <Tab>CONFIRM <div className="count">{confirm}</div></Tab>
                 <Tab>REJECTED <div className="count">{reject}</div></Tab>
                 <Tab>COMPLETED <div className="count">{complete}</div></Tab>
+              </TabList> */}
+
+              <TabList>
+                <Tab>CONFIRM <div className="count">4</div></Tab>
+                <Tab>REJECTED <div className="count">4</div></Tab>
+                <Tab>COMPLETED <div className="count">4</div></Tab>
               </TabList>
 
               <TabPanel>

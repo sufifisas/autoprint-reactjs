@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
   }));
 
-export default function UpdatePassword(props) {
+export default function ProductModal(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [text, setText] = useState("");
@@ -75,33 +75,33 @@ export default function UpdatePassword(props) {
       };
     
 	const submitHandler = e => {
-        setLoading(true)
-        setErr(false)
-        setSuccess(false)
+    //     setLoading(true)
+    //     setErr(false)
+    //     setSuccess(false)
         setShow(false)
-        setResult(false)
-        const token = localStorage.getItem("token")
-        const details = {
-            price : price,
-            active: status,
-        }
-		e.preventDefault()
-        axios
-            .put(`/product/vendor/${props.id}`, details)
-            .then(response => {
-                console.log(response,"updated");
+    //     setResult(false)
+    //     const token = localStorage.getItem("token")
+    //     const details = {
+    //         price : price,
+    //         active: status,
+    //     }
+		// e.preventDefault()
+    //     axios
+    //         .put(`/product/vendor/${props.id}`, details)
+    //         .then(response => {
+    //             console.log(response,"updated");
                 setText(`Product ${props.name} has been updated`)
                 setLoading(false)
                 setSuccess(true)
                 setResult(true)
-            })
-            .catch(error => {
-                setText("Please enter a valid amount")
-                console.log(error.response.data)
-                setLoading(false)
-                setResult(true)
+    //         })
+    //         .catch(error => {
+    //             setText("Please enter a valid amount")
+    //             console.log(error.response.data)
+    //             setLoading(false)
+    //             setResult(true)
                 
-            })
+    //         })
         }
     
         const handleClose = () => {

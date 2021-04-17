@@ -24,22 +24,22 @@ class Vendor extends Component {
     loggedIn: true,
   };
 
-  componentDidMount() {
-    const token = localStorage.getItem("token");
-    if (token === null) {
-      this.setState({ loggedIn: false });
-    }
-    const headers = {
-      'Content-Type': 'application/json',
-      'Authorization': localStorage.getItem('token')
-    }
-    const id = localStorage.getItem("id");
-    axios.get('/vendor/users/'+ id ,{headers})
-      .then(res => {
-          console.log(res)
-          localStorage.setItem("vendorId",res.data.id)
-      })
-  }
+  // componentDidMount() {
+  //   const token = localStorage.getItem("token");
+  //   if (token === null) {
+  //     this.setState({ loggedIn: false });
+  //   }
+  //   const headers = {
+  //     'Content-Type': 'application/json',
+  //     'Authorization': localStorage.getItem('token')
+  //   }
+  //   const id = localStorage.getItem("id");
+  //   axios.get('/vendor/users/'+ id ,{headers})
+  //     .then(res => {
+  //         console.log(res)
+  //         localStorage.setItem("vendorId",res.data.id)
+  //     })
+  // }
 
   render() {
     if (!this.state.loggedIn) {

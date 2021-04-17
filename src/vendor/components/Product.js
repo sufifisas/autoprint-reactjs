@@ -5,21 +5,21 @@ import Loader from "./Loader";
 import Add from './AddProductModal'
 
 function Product() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(`/product/vendor/vendors/${localStorage.getItem("vendorId")}`)
-      .then((response) => {
-        console.log(response, "all");
-        setList(response.data.content);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(`/product/vendor/vendors/${localStorage.getItem("vendorId")}`)
+  //     .then((response) => {
+  //       console.log(response, "all");
+  //       setList(response.data.content);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
 
 
   return (
@@ -34,7 +34,7 @@ function Product() {
             <div className="product-wrap">
                 
                 <div className="product-content">
-                  {list.length > 0 ? (
+                  {!list.length > 0 ? (
                     <div>
                         <div className='add'><Add title="List of product"/></div>
                       <ul className="product-header">
@@ -43,7 +43,7 @@ function Product() {
                         <li className="col-2">Price</li>
                         <li className="col-1"></li>
                       </ul>
-                      {list.map((item, i) => {
+                      {/* {list.map((item, i) => {
                         return (
                           <ul key={i} className="product-list">
                             <li className="col-7">
@@ -64,7 +64,48 @@ function Product() {
                             </li>
                           </ul>
                         );
-                      })}
+                      })} */}
+
+
+                          <ul className="product-list">
+                            <li className="col-7">
+                              AUTO COLOUR
+                            </li>
+                            <li className="col-2">
+                              ACTIVE
+                            </li>
+                            <li className="col-2">MYR 0.50</li>
+                            <li className="col-1">
+                              <Update
+                                price={0.5}
+                                name="AUTO COLOUR"
+                                id={1}
+                                active="ACTIVE"
+                                title="AUTO COLOUR"
+                              />
+                            </li>
+                          </ul>
+
+                          <ul className="product-list">
+                            <li className="col-7">
+                              MONOCHROME COLOUR
+                            </li>
+                            <li className="col-2">
+                              ACTIVE
+                            </li>
+                            <li className="col-2">MYR 0.10</li>
+                            <li className="col-1">
+                              <Update
+                                price={0.1}
+                                name="MONOCHROME COLOUR"
+                                id={2}
+                                active="ACTIVE"
+                                title="MONOCHROME COLOUR"
+                              />
+                            </li>
+                          </ul>
+                
+
                     </div>
                   ) : (
                     <div className="content-center">

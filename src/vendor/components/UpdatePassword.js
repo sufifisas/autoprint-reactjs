@@ -72,40 +72,40 @@ export default function UpdatePassword(props) {
       };
     
 	const submitHandler = e => {
-        setLoading(true)
-        setErr(false)
-        setSuccess(false)
+    //     setLoading(true)
+    //     setErr(false)
+    //     setSuccess(false)
         setShow(false)
-        setResult(false)
-        const token = localStorage.getItem("token")
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': token
-          }
-        const details = {
-            currentPassword : currpass,
-            newPassword : newpass,
-        }
-        const id = localStorage.getItem("id");
-		e.preventDefault()
-		axios
-            .put('/user/update/password', details, {headers})
-			.then(response => {
-                if (response.status === 200) {
+    //     setResult(false)
+    //     const token = localStorage.getItem("token")
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': token
+    //       }
+    //     const details = {
+    //         currentPassword : currpass,
+    //         newPassword : newpass,
+    //     }
+    //     const id = localStorage.getItem("id");
+		// e.preventDefault()
+		// axios
+    //         .put('/user/update/password', details, {headers})
+		// 	.then(response => {
+    //             if (response.status === 200) {
                     setLoading(false);
                     setSuccess(true);
                     setResult(true);
                     setTopic("SUCCESS")
                     setText("Your new password has been successfully updated");         
-                }
-			})
-			.catch(error => {
-                setLoading(false)
-                setErr(true)
-                setResult(true);
-                setTopic("ERROR")
-                setText(error.response.data.message)
-                })
+    //             }
+		// 	})
+		// 	.catch(error => {
+    //             setLoading(false)
+    //             setErr(true)
+    //             setResult(true);
+    //             setTopic("ERROR")
+    //             setText(error.response.data.message)
+    //             })
         }
     
         const handleClose = () => {

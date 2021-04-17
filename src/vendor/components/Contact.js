@@ -36,34 +36,34 @@ function Contact() {
     const [result, setResult] = useState(false);
 
 	const submitHandler = e => {
-        const details = {
-            content : content,
-            title : title
-        }
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem("token")
-          }
-        setLoading(true)
-        setSuccess(false)
-        setResult(false)
+    //     const details = {
+    //         content : content,
+    //         title : title
+    //     }
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': localStorage.getItem("token")
+    //       }
+    //     setLoading(true)
+    //     setSuccess(false)
+    //     setResult(false)
         e.preventDefault()
-		axios
-			.post('/activity', details , {headers})
-			.then(response => {
-                console.log(response);
-                if(response.status === 200){
+		// axios
+		// 	.post('/activity', details , {headers})
+		// 	.then(response => {
+    //             console.log(response);
+    //             if(response.status === 200){
                     setLoading(false)
                     setSuccess(true)
                     setResult(true)
                     setText("Your report has been successfully sent.")
-                }        
-			})
-			.catch(error => {
-                setResult(true)
-                setLoading(false)
-                setText("Please fill in the form provided")
-			})
+    //             }        
+		// 	})
+		// 	.catch(error => {
+    //             setResult(true)
+    //             setLoading(false)
+    //             setText("Please fill in the form provided")
+		// 	})
         }
         return (
           <div className="vendor-site">

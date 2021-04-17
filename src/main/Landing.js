@@ -26,12 +26,12 @@ class Landing extends Component {
         }    
     }
   render=()=>{
-    if(this.state.loggedIn){
-      if(this.state.userIn){
-        return <Redirect to="/user/" />
-      }
-      return <Redirect to="/vendor" />
-    }
+    // if(this.state.loggedIn){
+    //   if(this.state.userIn){
+    //     return <Redirect to="/user/" />
+    //   }
+    //   return <Redirect to="/vendor" />
+    // }
   
   return (
     

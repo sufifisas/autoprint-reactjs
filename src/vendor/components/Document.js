@@ -18,7 +18,7 @@ import {Link} from 'react-router-dom'
 
 
 function Document() {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [amount, setAmount] = useState([])
     const [list, setList] = useState([])
     const [arr, setArr] = useState([])
@@ -27,43 +27,43 @@ function Document() {
 
     Geocode.setApiKey("AIzaSyDxgA4kIuo0-bxfSaqCOCwmlyjnV05oVPE");
 
-    useEffect(() => {
-      const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': localStorage.getItem("token")
-      }
-      axios
-            .get(`/document/order/${localStorage.getItem("OrderId")}`,{headers})
-		        .then(response => {
-             console.log(response.data.content)
-                setList(response.data.content)
-                setLoading(false)
-                })
-            .catch(error => {
-              console.log(error)
-                  })
+    // useEffect(() => {
+    //   const headers = {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': localStorage.getItem("token")
+    //   }
+    //   axios
+    //         .get(`/document/order/${localStorage.getItem("OrderId")}`,{headers})
+		//         .then(response => {
+    //          console.log(response.data.content)
+    //             setList(response.data.content)
+    //             setLoading(false)
+    //             })
+    //         .catch(error => {
+    //           console.log(error)
+    //               })
 
-            axios
-            .get(`/order/${localStorage.getItem("OrderId")}`,{headers})
-            .then(response => {
-                      setAmount(response.data.invoices[0].amount)
-                      setArr(response.data)
-                      setLoading(false)
-                      console.log(response.data,"order")
-                      })
-            .catch(error => {
-              alert(error)
-                  })
+    //         axios
+    //         .get(`/order/${localStorage.getItem("OrderId")}`,{headers})
+    //         .then(response => {
+    //                   setAmount(response.data.invoices[0].amount)
+    //                   setArr(response.data)
+    //                   setLoading(false)
+    //                   console.log(response.data,"order")
+    //                   })
+    //         .catch(error => {
+    //           alert(error)
+    //               })
 
-            Geocode.fromLatLng(localStorage.getItem("userLat"), localStorage.getItem("userLong")).then(
-              response => {
-                setUserAdd(response.results[0].formatted_address)
-              },
-              error => {
-                console.error(error);
-              }
-            );
-        },[]);
+    //         Geocode.fromLatLng(localStorage.getItem("userLat"), localStorage.getItem("userLong")).then(
+    //           response => {
+    //             setUserAdd(response.results[0].formatted_address)
+    //           },
+    //           error => {
+    //             console.error(error);
+    //           }
+    //         );
+    //     },[]);
     
     return (
         <div className="vendor-site">
@@ -74,7 +74,7 @@ function Document() {
                 <div className = "profile-center">
                     <div className="profile" style={{maxWidth:'1240px'}}>
                    
-                  <div className="list-bg document-list">
+                  <div className="list-bg document-list1">
                   <div className="list-detail">
                     <div className="list-detail-content row">
                       
@@ -93,37 +93,40 @@ function Document() {
                           <ScheduleOutlinedIcon fontSize="large" style={{color:'#8860D0'}}/>
                           <div className="detail">
                             <h4>created on</h4>
-                            <h3>{dateFormat(arr.dateCreated, "mmmm dS, yyyy")}</h3>
+                            {/* <h3>{dateFormat(arr.dateCreated, "mmmm dS, yyyy")}</h3> */}
+                            <h3>{dateFormat("mmmm dS, yyyy")}</h3>
                           </div>
                         </div>
                         <div className="col-4 on-right">
                           <HourglassEmptyIcon fontSize="large" style={{color:'#8860D0'}}/>
                           <div className="detail">
                             <h4>status</h4>
-                            <h3>{arr.status}</h3>
+                            {/* <h3>{arr.status}</h3> */}
+                            <h3>PENDING</h3>
                           </div>
                         </div>
                         <div className="col-4 on-right">
                           <AttachMoneyIcon fontSize="large" style={{color:'#8860D0'}}/>
                           <div className="detail">
                             <h4>Price</h4>
-                            <h3>MYR {amount}</h3>
+                            {/* <h3>MYR {amount}</h3> */}
+                            <h3>MYR 2.00</h3>
                           </div>
                         </div>
-                        {arr.status === "REJECTED" && 
+                        {/* {arr.status === "REJECTED" && 
                         <div className="col-12">
                         {arr.reason}
-                        </div>}
+                        </div>} */}
                       </div>
                       </div>
-                      <div>{arr.reason}</div>
+                      {/* <div>{arr.reason}</div> */}
                     </div>
                   </div>
-                  {list.length>0 ? 
+                  {!list.length>0 ? 
                     <div className="list-container">
                     <ul className="list-header row pt-4 pb-3 mb-0">
                       <li className="col-1">No.</li>
-                      <li className="col-4">Filename</li>
+                      <li className="col-2">Filename</li>
                       <li className="col-1">Copies</li>
                       <li className="col-2">Colour</li>
                       <li className="col-2">Pages</li>
@@ -131,7 +134,7 @@ function Document() {
                       <li className="col-2">Duplex</li>
                     </ul>
                     <div>
-                      {list.map((item, i) => {
+                      {/* {list.map((item, i) => {
                         return (
                             <ul key= {i} className="orderlist row">
                                 <li className="col-1">{i+1}</li>
@@ -146,7 +149,36 @@ function Document() {
                                 </li>
                             </ul>
                         )
-                      })}
+                      })} */}
+
+                        <ul className="orderlist row">
+                            <li className="col-1">1</li>
+                            <li className="col-2">document1.pdf</li>
+                            <li className="col-1">2</li>
+                            <li className="col-2">MONOCHROME</li>
+                            <li className="col-2">1</li>
+                            <li className="col-2">PORTRAIT</li>
+                            <li className="col-2">DUPLEX</li>
+                        </ul>
+                        <ul className="orderlist row">
+                            <li className="col-1">2</li>
+                            <li className="col-2">document2.pdf</li>
+                            <li className="col-1">2</li>
+                            <li className="col-2">AUTOE</li>
+                            <li className="col-2">1</li>
+                            <li className="col-2">LANDSCAPE</li>
+                            <li className="col-2">NO_DUPLEX</li>
+                        </ul>
+                        <ul className="orderlist row">
+                            <li className="col-1">3</li>
+                            <li className="col-2">document3.pdf</li>
+                            <li className="col-1">2</li>
+                            <li className="col-2">MONOCHROME</li>
+                            <li className="col-2">1</li>
+                            <li className="col-2">PORTRAIT</li>
+                            <li className="col-2">DUPLEX</li>
+                        </ul>
+
                     </div>
                   <div className="pre-confirm row">
                       <div>
