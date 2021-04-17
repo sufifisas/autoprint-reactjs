@@ -26,6 +26,16 @@ class Landingheader extends Component {
               {/* <li>Home</li>
               <li>About</li>
               <li>Contact</li> */}
+              <li>
+                <Link to='/user'>
+                  User
+                </Link>
+              </li>
+              <li>
+                <Link to='/vendor'>
+                  Vendor
+                </Link>
+              </li>
             </ul>
             <LoginModal title="welcome back!"/>
         </nav>
